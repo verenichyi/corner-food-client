@@ -1,0 +1,51 @@
+* {
+  font-family: 'Gilroy', sans-serif;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  font-weight: 400;
+}
+
+a,
+a:hover,
+a:active,
+a:visited,
+a:focus {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+body {
+  font-size: 12px;
+  min-width: 320px;
+}
+
+input:focus,
+input:focus-visible,
+button:focus,
+button:focus-visible,
+textarea:focus,
+textarea:focus-visible {
+  outline: none;
+}

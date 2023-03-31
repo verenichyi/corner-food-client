@@ -1,26 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router';
+import { toast, ToastContainer } from 'react-toastify';
+import './styles/main.scss';
+import 'react-toastify/dist/ReactToastify.css';
+import { useAppDispatch, useAppSelector } from './hooks/redux';
+import { selectAuth } from './redux/store/selectors';
+import { checkAuth } from './redux/asyncActions/auth';
+import RoutesList from './constants/routes';
+import NotFound from './components/NotFound';
+import ProtectedLayout from './layouts/ProtectedLayout';
+import AuthLayout from './layouts/AuthLayout';
+import Loader from './UI/Loader';
+import { themeAttribute } from './constants/theme';
+import { Theme } from './models/theme';
 
-function App() {
+const App = () => {
+  const [theme, setTheme] = useState(Theme.Light);
+  const { loading, error, success } = useAppSelector(selectAuth);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(checkAuth());
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute(themeAttribute, theme);
+  }, [theme]);
+
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ToastContainer />
+      <Routes>
+        <Route path={RoutesList.Home} element={<AuthLayout />}>
+          <Route path={RoutesList.SIGN_IN} element={'<SignIn />'} />
+          <Route path={RoutesList.SIGN_UP} element={'<SignUp />'} />
+        </Route>
+        <Route path={RoutesList.Home} element={<ProtectedLayout />}>
+          <Route index element={'main'} />
+        </Route>
+        <Route path={RoutesList.NOT_FOUND} element={<NotFound />} />
+      </Routes>
+    </>
   );
-}
+};
 
 export default App;

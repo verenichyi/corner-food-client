@@ -1,0 +1,23 @@
+
+.eye {
+  cursor: pointer;
+  width: 1.5em;
+  height: 1.5em;
+  position: absolute;
+  right: 1em;
+  top: 2.5em;
+  fill: $grey;
+  transition: all 0.2s ease;
+
+  &:hover {
+    fill: $primary-color;
+  }
+}
+
+.eye_visible {
+  fill: $primary-color;
+
+  &:hover {
+    fill: $grey;
+  }
+}

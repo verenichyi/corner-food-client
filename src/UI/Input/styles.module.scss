@@ -1,0 +1,21 @@
+
+.inputWrapper {
+  position: relative;
+  margin-bottom: 1em;
+}
+
+.input {
+  width: 100%;
+  font-size: inherit;
+  border: 1px solid $grey;
+  border-radius: 8px;
+  padding: 1em;
+  margin: 0.5em 0;
+}
+
+.label {
+  cursor: pointer;
+  font-size: 0.875em;
+  line-height: 1.35em;
+  color: var(--primary);
+}
