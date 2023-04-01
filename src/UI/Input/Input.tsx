@@ -47,7 +47,9 @@ function Input<T extends FieldValues>({
         className={styles.input}
       />
       {children}
-      <FormError errors={errors} name={name} />
+      <div className={styles.error}>
+        <FormError errors={errors} name={name} />
+      </div>
     </div>
   );
 }

@@ -4,7 +4,7 @@ import styles from './styles.module.scss';
 import icons from '../../assets/icons.svg';
 
 const Eye = ({ handleClick }: { handleClick: () => void }) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   const handleVisibility = () => {
     handleClick();

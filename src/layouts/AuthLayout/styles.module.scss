@@ -1,0 +1,73 @@
+.auth {
+  background-color: var(--appBackground);
+  max-width: 694px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  flex: 0;
+  background-color: var(--elementBackground);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border-radius: 0 0 40px 40px;
+  padding: 34px 37px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.logo {
+  width: 127px;
+  height: 127px;
+  margin-bottom: 20px;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.title {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  color: var(--secondaryText);
+  font-weight: 400;
+  font-size: 16px;
+  margin-bottom: 23px;
+}
+
+.nav {
+  display: flex;
+  width: 100%;
+}
+
+.navItem {
+  display: block;
+  width: 50%;
+  text-align: center;
+  font-weight: 400;
+  font-size: 18px;
+  padding: 14px;
+  color: var(--primaryText);
+  border-bottom: 2px solid transparent;
+}
+
+.navItem_active {
+  border-bottom: 2px solid var(--navActiveElement);
+}
+
+.main {
+  flex: 1;
+  padding: 0 37px 42px;
+  display: flex;
+  flex-direction: column;
+}

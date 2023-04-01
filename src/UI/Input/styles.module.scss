@@ -1,21 +1,30 @@
-
 .inputWrapper {
   position: relative;
-  margin-bottom: 1em;
+  margin-bottom: 32px;
 }
 
 .input {
+  display: block;
   width: 100%;
-  font-size: inherit;
-  border: 1px solid $grey;
-  border-radius: 8px;
-  padding: 1em;
-  margin: 0.5em 0;
+  font-size: 14px;
+  line-height: 28px;
+  font-weight: 500;
+  border: none;
+  border-bottom: 1px solid var(--primary);
+  padding: 0 0 9px;
+  color: var(--primary);
+  background-color: var(--appBackground);
 }
 
 .label {
   cursor: pointer;
-  font-size: 0.875em;
-  line-height: 1.35em;
-  color: var(--primary);
+  font-size: 12px;
+  line-height: 28px;
+  font-weight: 400;
+  color: var(--secondaryText);
+}
+
+.error {
+  position: absolute;
+  top: 100%;
 }
