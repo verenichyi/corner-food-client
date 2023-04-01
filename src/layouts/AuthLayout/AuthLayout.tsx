@@ -1,10 +1,11 @@
 import React from 'react';
-import { Navigate, NavLink, Outlet, useLocation } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import styles from './styles.module.scss';
 import { useAppSelector } from '../../hooks/redux';
 import { selectAuth } from '../../redux/store/selectors';
-import RoutesList, { authNavBarItems } from '../../constants/routes';
-import logo from '../../assets/images/logo.jpg';
+import RoutesList from '../../constants/routes';
+import Container from '../../UI/Container';
+import AuthHeader from '../../components/AuthHeader';
 
 const AuthLayout = () => {
   const { isAuthorized } = useAppSelector(selectAuth);
@@ -17,29 +18,12 @@ const AuthLayout = () => {
 
   return (
     <div className={styles.auth}>
-      <header className={styles.header}>
-        <div className={styles.logo}>
-          <img src={logo} alt="logo" />
-        </div>
-        <h1 className={styles.title}>Corner Food</h1>
-        <h2 className={styles.subtitle}>Delivery App</h2>
-        <nav className={styles.nav}>
-          {authNavBarItems.map((item) => (
-            <NavLink
-              key={item.link}
-              className={({ isActive }: { isActive: boolean }) =>
-                isActive ? `${styles.navItem} ${styles.navItem_active}` : styles.navItem
-              }
-              to={item.link}
-            >
-              {item.content}
-            </NavLink>
-          ))}
-        </nav>
-      </header>
-      <main className={styles.main}>
-        <Outlet />
-      </main>
+      <Container>
+        <AuthHeader />
+        <main className={styles.main}>
+          <Outlet />
+        </main>
+      </Container>
     </div>
   );
 };
