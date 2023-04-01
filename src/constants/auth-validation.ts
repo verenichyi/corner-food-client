@@ -7,6 +7,7 @@ const authValidation = {
   password: {
     required: 'This field is required',
     message: 'Min length: 4',
+    confirm: 'Passwords do not match',
   },
   username: {
     required: 'This field is required',
