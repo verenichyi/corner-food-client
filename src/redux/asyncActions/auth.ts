@@ -3,6 +3,7 @@ import AuthService from '../../http/services/AuthService';
 import { LoginUserDto, RegisterUserDto } from '../../models/User/UserDto';
 import { AuthResponse } from '../../models/Auth/authResponse';
 import { handleAxiosError } from '../../utils/handleAxiosErrors';
+import { CredentialResponse } from '@react-oauth/google';
 
 export const registerUser = createAsyncThunk<
   AuthResponse,
@@ -28,6 +29,19 @@ export const loginUser = createAsyncThunk<AuthResponse, LoginUserDto, { rejectVa
     }
   },
 );
+
+export const loginWithGoogle = createAsyncThunk<
+  AuthResponse,
+  CredentialResponse,
+  { rejectValue: string }
+>('auth/loginWithGoogle', async (credentialResponse, { rejectWithValue }) => {
+  try {
+    const { data } = await AuthService.googleAuth(credentialResponse);
+    return data;
+  } catch (error) {
+    return rejectWithValue(handleAxiosError(error));
+  }
+});
 
 export const checkAuth = createAsyncThunk<AuthResponse, void, { rejectValue: string }>(
   'auth/check',

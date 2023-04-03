@@ -12,6 +12,7 @@ import RoutesList from './constants/routes';
 import { themeAttribute } from './constants/theme';
 import { Theme } from './models/theme';
 import { authActions } from './redux/slices/auth';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const ProtectedLayout = lazy(() => import('./layouts/ProtectedLayout'));
 const AuthLayout = lazy(() => import('./layouts/AuthLayout'));
@@ -20,7 +21,7 @@ const SignUpForm = lazy(() => import('./components/SignUpForm'));
 
 const App = () => {
   const [theme, setTheme] = useState(Theme.Light);
-  const { loading, error } = useAppSelector(selectAuth);
+  const { error } = useAppSelector(selectAuth);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -43,7 +44,7 @@ const App = () => {
   }, [error]);
 
   return (
-    <>
+    <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID!}>
       <ToastContainer />
       <Suspense
         fallback={
@@ -63,7 +64,7 @@ const App = () => {
           <Route path={RoutesList.NOT_FOUND} element={<NotFound />} />
         </Routes>
       </Suspense>
-    </>
+    </GoogleOAuthProvider>
   );
 };
 
