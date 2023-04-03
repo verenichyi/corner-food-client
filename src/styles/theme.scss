@@ -1,0 +1,35 @@
+:root[color-scheme='light'] {
+  --appBackground: #f2f6f7;
+  --primary: #104e5b;
+  --primaryElement: #fdc27a;
+  --notActiveElement: #e5e5e5;
+  --primaryText: #2b2d33;
+  --secondaryText: #616f80;
+  --elementBackground: #fff;
+  --authNavBackground: #fff;
+  --currency: #99c932;
+  --navActiveElement: #fdc27a;
+  --navNotActiveElement: #e5e5e5;
+  --navBackground: #fff;
+  --error: #ff6f5a;
+  --success: #11d17d;
+  color-scheme: light;
+}
+
+:root[color-scheme='dark'] {
+  --appBackground: #232033;
+  --primary: #104e5b;
+  --primaryElement: #fdc27a;
+  --notActiveElement: #e5e5e5;
+  --primaryText: #d1d1d1;
+  --secondaryText: #a09fa3;
+  --elementBackground: #26273b;
+  --authNavBackground: #26273b;
+  --currency: #99c932;
+  --navActiveElement: #fdc27a;
+  --navNotActiveElement: #d1d1d1;
+  --navBackground: #26273b;
+  --error: #ff6f5a;
+  --success: #11d17d;
+  color-scheme: dark;
+}

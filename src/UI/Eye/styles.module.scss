@@ -1,0 +1,22 @@
+.eye {
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: 0;
+  top: 2.5em;
+  fill: var(--notActiveElement);
+  transition: all 0.2s ease;
+
+  &:hover {
+    fill: var(--primaryElement);
+  }
+}
+
+.eye_visible {
+  fill: var(--primaryElement);
+
+  &:hover {
+    fill: var(--notActiveElement);
+  }
+}

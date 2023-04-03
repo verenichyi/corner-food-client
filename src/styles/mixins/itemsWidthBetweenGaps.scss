@@ -1,0 +1,3 @@
+@mixin itemsWidthBetweenGaps($gap, $elsAmount) {
+  width: calc(calc(100% - (($elsAmount - 1) * $gap)) / $elsAmount);
+}

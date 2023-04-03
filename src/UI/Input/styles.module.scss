@@ -1,0 +1,30 @@
+.inputWrapper {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  font-size: 14px;
+  line-height: 28px;
+  font-weight: 500;
+  border: none;
+  border-bottom: 1px solid var(--primary);
+  padding: 0 0 9px;
+  color: var(--primary);
+  background-color: var(--appBackground);
+}
+
+.label {
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 28px;
+  font-weight: 400;
+  color: var(--secondaryText);
+}
+
+.error {
+  position: absolute;
+  top: 100%;
+}
