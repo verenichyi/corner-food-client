@@ -1,16 +1,24 @@
 import React from 'react';
 import { FoodCardModel } from '../FoodCards/FoodCards';
+import favoriteUnselected from '../../assets/images/ic_favorite_unselected.png';
+import favoriteSelected from '../../assets/images/ic_favorite_selected.png';
 import styles from './styles.module.scss';
 
 interface Props {
   card: FoodCardModel;
+  isFavorite: boolean;
 }
 
-const FoodCard = ({ card }: Props) => {
+const FoodCard = ({ card, isFavorite }: Props) => {
+  const favoriteImg = isFavorite ? favoriteSelected : favoriteUnselected;
+
   return (
     <figure className={styles.card}>
       <div className={styles.image}>
         <img src={card.image} alt="food card" />
+        <div className={styles.favorite}>
+          <img className={styles.favoriteIcon} src={favoriteImg} alt="favorite" />
+        </div>
       </div>
       <figcaption className={styles.body}>
         <h2 className={styles.title}>{card.title}</h2>
