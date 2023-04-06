@@ -1,0 +1,19 @@
+.chip {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--primaryText);
+  background-color: var(--elementBackground);
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.01);
+  border-radius: 20px;
+}
+
+.chip_active {
+  color: var(--primary);
+  background-color: var(--primaryElement);
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.05)
+}

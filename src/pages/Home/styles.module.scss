@@ -1,0 +1,37 @@
+.homePage {
+  min-width: 320px;
+  max-width: 768px;
+  margin: 0 auto;
+}
+
+.container {
+  padding: 15px 36px 0 30px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.title {
+  color: var(--primaryText);
+  max-width: 160px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 36px;
+}
+
+.searchFilter {
+  display: flex;
+  gap: 15px;
+  row-gap: 35px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.search {
+  flex: 1 1;
+}
+

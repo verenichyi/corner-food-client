@@ -1,35 +1,37 @@
-:root[color-scheme='light'] {
-  --appBackground: #f2f6f7;
+:root {
   --primary: #104e5b;
+  --regularText: #2b2d33;
   --primaryElement: #fdc27a;
   --notActiveElement: #e5e5e5;
-  --primaryText: #2b2d33;
+  --currency: #99c932;
+  --error: #ff6f5a;
+  --success: #11d17d;
+}
+
+:root[color-scheme='light'] {
+  --primaryText: #104e5b;
+  --navText: #2b2d33;
   --secondaryText: #616f80;
+  --appBackground: #f2f6f7;
   --elementBackground: #fff;
   --authNavBackground: #fff;
-  --currency: #99c932;
   --navActiveElement: #fdc27a;
   --navNotActiveElement: #e5e5e5;
   --navBackground: #fff;
-  --error: #ff6f5a;
-  --success: #11d17d;
+  --inputBorder: #104e5b;
   color-scheme: light;
 }
 
 :root[color-scheme='dark'] {
-  --appBackground: #232033;
-  --primary: #104e5b;
-  --primaryElement: #fdc27a;
-  --notActiveElement: #e5e5e5;
-  --primaryText: #d1d1d1;
+  --primaryText: #f2f6f7;
+  --navText: #fff;
   --secondaryText: #a09fa3;
+  --appBackground: #232033;
   --elementBackground: #26273b;
   --authNavBackground: #26273b;
-  --currency: #99c932;
   --navActiveElement: #fdc27a;
   --navNotActiveElement: #d1d1d1;
   --navBackground: #26273b;
-  --error: #ff6f5a;
-  --success: #11d17d;
+  --inputBorder: #2F3045;
   color-scheme: dark;
 }

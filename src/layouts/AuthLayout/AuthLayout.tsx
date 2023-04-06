@@ -4,7 +4,6 @@ import styles from './styles.module.scss';
 import { useAppSelector } from '../../hooks/redux';
 import { selectAuth } from '../../redux/store/selectors';
 import RoutesList from '../../constants/routes';
-import Container from '../../UI/Container';
 import AuthHeader from '../../components/AuthHeader';
 
 const AuthLayout = () => {
@@ -18,12 +17,12 @@ const AuthLayout = () => {
 
   return (
     <div className={styles.auth}>
-      <Container>
+      <div className={styles.container}>
         <AuthHeader />
         <main className={styles.main}>
           <Outlet />
         </main>
-      </Container>
+      </div>
     </div>
   );
 };
