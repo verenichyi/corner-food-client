@@ -10,14 +10,14 @@
   flex-direction: column;
   align-items: center;
 
-  @include itemsWidthBetweenGaps(30px, 2);
+  @include itemsWidthBetweenGaps(25px, 2);
 
   @include screen-sm {
-    @include itemsWidthBetweenGaps(30px, 3);
+    @include itemsWidthBetweenGaps(25px, 3);
   }
 
   @include screen-m {
-    @include itemsWidthBetweenGaps(30px, 4);
+    @include itemsWidthBetweenGaps(25px, 4);
   }
 }
 

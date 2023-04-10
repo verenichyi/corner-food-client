@@ -1,41 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import styles from './styles.module.scss';
-
-export type FoodType = 'Fast Food' | 'Vegetarian' | 'Drink' | 'Spicy' | 'Salty' | 'Sour';
-
-type Chip = {
-  _id: string;
-  value: FoodType;
-};
-
-const chips: Chip[] = [
-  {
-    _id: '1',
-    value: 'Fast Food',
-  },
-  {
-    _id: '2',
-    value: 'Vegetarian',
-  },
-  {
-    _id: '3',
-    value: 'Drink',
-  },
-  {
-    _id: '4',
-    value: 'Spicy',
-  },
-  {
-    _id: '5',
-    value: 'Salty',
-  },
-  {
-    _id: '6',
-    value: 'Sour',
-  },
-];
+import { getFoodTypes } from '../../redux/asyncActions/food';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { selectFood } from '../../redux/store/selectors';
 
 interface Props {
   activeChip: string;
@@ -43,6 +12,13 @@ interface Props {
 }
 
 const Chips = ({ activeChip, setActiveChip }: Props) => {
+  const { foodTypes } = useAppSelector(selectFood);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getFoodTypes());
+  }, []);
+
   const handleClick = (value: string) => {
     if (value === activeChip) {
       setActiveChip('');
@@ -54,7 +30,7 @@ const Chips = ({ activeChip, setActiveChip }: Props) => {
 
   return (
     <Swiper spaceBetween={12} slidesPerView={3}>
-      {chips.map((chip) => {
+      {foodTypes.map((chip) => {
         const isActive = activeChip === chip.value;
 
         return (

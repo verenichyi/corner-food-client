@@ -18,6 +18,7 @@ const AuthLayout = lazy(() => import('./layouts/AuthLayout'));
 const SignInForm = lazy(() => import('./components/SignInForm'));
 const SignUpForm = lazy(() => import('./components/SignUpForm'));
 const Home = lazy(() => import('./pages/Home'));
+const Favorite = lazy(() => import('./pages/Favorite'));
 const Profile = lazy(() => import('./pages/Profile'));
 
 const App = () => {
@@ -65,7 +66,7 @@ const App = () => {
           </Route>
           <Route path={RoutesList.Home} element={<AppLayout />}>
             <Route index element={<Home />} />
-            <Route path={RoutesList.Favorite} element={'Favorite'} />
+            <Route path={RoutesList.Favorite} element={<Favorite />} />
             <Route path={RoutesList.Notification} element={'Notification'} />
             <Route path={RoutesList.Profile} element={<Profile />} />
           </Route>
