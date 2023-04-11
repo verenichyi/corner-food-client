@@ -15,3 +15,8 @@ export interface FoodModel {
   price: number;
   favoriteFoodForUserIds: string[];
 }
+
+export interface SearchFood {
+  searchValue: string;
+  foodType: string;
+}

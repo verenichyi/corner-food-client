@@ -1,8 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { handleAxiosError } from '../../utils/handleAxiosErrors';
-import { FoodModel, FoodType } from '../../models/Food/food';
+import { FoodModel, FoodType, SearchFood } from '../../models/Food/food';
 import FoodService from '../../http/services/FoodService';
-import { FavoriteFoodDto, FavoriteFoodModel } from '../../models/Food/favorite-food';
+import {
+  FavoriteFoodDto,
+  FavoriteFoodModel,
+  SearchFavoriteFood,
+} from '../../models/Food/favorite-food';
 
 export const getFoodTypes = createAsyncThunk<FoodType[], void, { rejectValue: string }>(
   'food/getFoodTypes',
@@ -15,6 +19,35 @@ export const getFoodTypes = createAsyncThunk<FoodType[], void, { rejectValue: st
     }
   },
 );
+
+export const searchFood = createAsyncThunk<FoodModel[], SearchFood, { rejectValue: string }>(
+  'food/searchFood',
+  async (searchFood, { rejectWithValue }) => {
+    try {
+      const { data } = await FoodService.searchFood(searchFood.searchValue, searchFood.foodType);
+      return data;
+    } catch (error) {
+      return rejectWithValue(handleAxiosError(error));
+    }
+  },
+);
+
+export const searchFavoriteFood = createAsyncThunk<
+  FavoriteFoodModel[],
+  SearchFavoriteFood,
+  { rejectValue: string }
+>('food/searchFavoriteFood', async (searchFavoriteFood, { rejectWithValue }) => {
+  try {
+    const { data } = await FoodService.searchFavoriteFood(
+      searchFavoriteFood.userId,
+      searchFavoriteFood.searchValue,
+      searchFavoriteFood.foodType,
+    );
+    return data;
+  } catch (error) {
+    return rejectWithValue(handleAxiosError(error));
+  }
+});
 
 export const getAllFood = createAsyncThunk<FoodModel[], void, { rejectValue: string }>(
   'food/getAllFood',

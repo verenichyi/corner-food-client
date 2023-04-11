@@ -11,3 +11,9 @@ export interface FavoriteFoodDto {
   user: string;
   food: string;
 }
+
+export interface SearchFavoriteFood {
+  userId: string;
+  searchValue: string;
+  foodType: string;
+}

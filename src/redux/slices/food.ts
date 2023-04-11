@@ -1,11 +1,12 @@
 import { AnyAction, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FoodModel, FoodType } from '../../models/Food/food';
 import {
-  getAllFood,
   getUserFavoriteFood,
   getFoodTypes,
   addFoodToFavorite,
   deleteFoodFromFavorite,
+  searchFood,
+  searchFavoriteFood,
 } from '../asyncActions/food';
 import { FavoriteFoodModel } from '../../models/Food/favorite-food';
 
@@ -45,14 +46,26 @@ const food = createSlice({
       state.foodTypes = action.payload;
     });
 
-    builder.addCase(getAllFood.pending, (state) => {
+    builder.addCase(searchFood.pending, (state) => {
       state.loading = true;
       state.error = null;
     });
-    builder.addCase(getAllFood.fulfilled, (state, action: PayloadAction<FoodModel[]>) => {
+    builder.addCase(searchFood.fulfilled, (state, action: PayloadAction<FoodModel[]>) => {
       state.loading = false;
       state.food = action.payload;
     });
+
+    builder.addCase(searchFavoriteFood.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(
+      searchFavoriteFood.fulfilled,
+      (state, action: PayloadAction<FavoriteFoodModel[]>) => {
+        state.loading = false;
+        state.userFavoriteFood = action.payload;
+      },
+    );
 
     builder.addCase(getUserFavoriteFood.pending, (state) => {
       state.loading = true;

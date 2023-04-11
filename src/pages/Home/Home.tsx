@@ -1,13 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { pageTitles } from '../../constants/page-titles';
 import Food from '../../components/Food';
-import { FoodModel } from '../../models/Food/food';
-import grilledFish from '../../assets/images/foodcards/image_grilled_fish.png';
-import friedChicken from '../../assets/images/foodcards/image_fried_chicken.png';
-import friedNoodle from '../../assets/images/foodcards/image_fried_noodle.png';
-import friedRice from '../../assets/images/foodcards/image_fried_rice.png';
 import FoodLayout from '../../layouts/FoodLayout';
-import { getAllFood } from '../../redux/asyncActions/food';
+import { searchFood } from '../../redux/asyncActions/food';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { selectFood } from '../../redux/store/selectors';
 
@@ -113,16 +108,12 @@ import { selectFood } from '../../redux/store/selectors';
 const Home = () => {
   const { food } = useAppSelector(selectFood);
   const dispatch = useAppDispatch();
-  const searchFood = (searchValue: string, foodType: string) => {
-    console.log({ searchValue }, { foodType });
+  const search = (searchValue: string, foodType: string) => {
+    dispatch(searchFood({ searchValue, foodType }));
   };
 
-  useEffect(() => {
-    dispatch(getAllFood());
-  }, []);
-
   return (
-    <FoodLayout title={pageTitles.home} search={searchFood}>
+    <FoodLayout title={pageTitles.home} search={search}>
       <Food food={food} />
     </FoodLayout>
   );

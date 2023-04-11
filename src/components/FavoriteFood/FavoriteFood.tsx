@@ -1,15 +1,13 @@
-import React, { memo, useEffect, useMemo } from 'react';
+import React, { memo, useMemo } from 'react';
 import styles from './styles.module.scss';
 import FoodCard from '../FoodCard';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { selectAuth, selectFood } from '../../redux/store/selectors';
-import { getUserFavoriteFood } from '../../redux/asyncActions/food';
+import { FavoriteFoodModel } from '../../models/Food/favorite-food';
 
-const FavoriteFood = memo(() => {
-  const dispatch = useAppDispatch();
-  const { user } = useAppSelector(selectAuth);
-  const { userFavoriteFood } = useAppSelector(selectFood);
+interface Props {
+  userFavoriteFood: FavoriteFoodModel[];
+}
 
+const FavoriteFood = memo(({ userFavoriteFood }: Props) => {
   const cards = useMemo(
     () =>
       userFavoriteFood.map((favoriteFood) => {
@@ -24,12 +22,6 @@ const FavoriteFood = memo(() => {
       }),
     [userFavoriteFood],
   );
-
-  useEffect(() => {
-    if (user) {
-      dispatch(getUserFavoriteFood(user._id));
-    }
-  }, []);
 
   return cards.length ? (
     <div className={styles.cards}>{cards}</div>

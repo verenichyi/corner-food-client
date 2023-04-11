@@ -5,11 +5,31 @@ import { FavoriteFoodDto, FavoriteFoodModel } from '../../models/Food/favorite-f
 
 const foodTypePath = '/food-type';
 const foodPath = '/food';
+const searchFoodPath = '/food/search?';
 const favoriteFoodPath = '/favorite-food';
 
 export default class FoodService {
   static async getFoodTypes(): Promise<AxiosResponse<FoodType[]>> {
     return $authApi.get<FoodType[]>(foodTypePath);
+  }
+
+  static async searchFood(
+    searchValue: string,
+    foodType: string,
+  ): Promise<AxiosResponse<FoodModel[]>> {
+    return $authApi.get<FoodModel[]>(
+      `${searchFoodPath}searchValue=${searchValue}&foodType=${foodType}`,
+    );
+  }
+
+  static async searchFavoriteFood(
+    userId: string,
+    searchValue: string,
+    foodType: string,
+  ): Promise<AxiosResponse<FavoriteFoodModel[]>> {
+    return $authApi.get<FavoriteFoodModel[]>(
+      `${favoriteFoodPath}/${userId}/search?searchValue=${searchValue}&foodType=${foodType}`,
+    );
   }
 
   static async getAllFood(): Promise<AxiosResponse<FoodModel[]>> {

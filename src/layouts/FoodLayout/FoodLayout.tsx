@@ -1,6 +1,5 @@
 import React, { memo, PropsWithChildren, useEffect, useState } from 'react';
 import styles from './styles.module.scss';
-import { pageTitles } from '../../constants/page-titles';
 import { useAppSelector } from '../../hooks/redux';
 import { selectAuth } from '../../redux/store/selectors';
 import userAvatar from '../../assets/images/user.png';
@@ -21,6 +20,10 @@ const FoodLayout = memo(({ children, title, search }: PropsWithChildren<Props>) 
   const [activeChip, setActiveChip] = useState('');
   const [isFilterActive, toggleIsFilterActive] = useIsActive();
   const avatar = user && user.profileImage ? user.profileImage : userAvatar;
+
+  useEffect(() => {
+    search(searchValue, activeChip);
+  }, []);
 
   useEffect(() => {
     search(searchValue, activeChip);
