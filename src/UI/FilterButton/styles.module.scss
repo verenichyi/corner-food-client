@@ -1,0 +1,48 @@
+.filterButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primaryElement);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filterIcon {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.filterIconItem {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background-color: var(--primary);
+
+  &:nth-child(1):after,
+  &:nth-child(2):after,
+  &:nth-child(3):after {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+  }
+
+  &:nth-child(1):after {
+    left: 2px;
+  }
+
+  &:nth-child(2):after {
+    right: 2px;
+  }
+
+  &:nth-child(3):after {
+    left: 5px;
+  }
+}

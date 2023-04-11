@@ -2,6 +2,8 @@
   font-family: 'Poppins', sans-serif;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
 }
 
 html, body {
@@ -16,7 +18,6 @@ h4,
 h5,
 h6,
 p {
-  margin: 0;
   font-weight: 400;
 }
 

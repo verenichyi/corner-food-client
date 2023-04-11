@@ -1,6 +1,7 @@
 import React, { lazy, useEffect, useState, Suspense } from 'react';
 import { Route, Routes } from 'react-router';
 import { toast, ToastContainer } from 'react-toastify';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import './styles/main.scss';
 import 'react-toastify/dist/ReactToastify.css';
 import NotFound from './components/NotFound';
@@ -12,12 +13,13 @@ import RoutesList from './constants/routes';
 import { themeAttribute } from './constants/theme';
 import { Theme } from './models/theme';
 import { authActions } from './redux/slices/auth';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-
-const ProtectedLayout = lazy(() => import('./layouts/ProtectedLayout'));
+const AppLayout = lazy(() => import('./layouts/AppLayout'));
 const AuthLayout = lazy(() => import('./layouts/AuthLayout'));
 const SignInForm = lazy(() => import('./components/SignInForm'));
 const SignUpForm = lazy(() => import('./components/SignUpForm'));
+const Home = lazy(() => import('./pages/Home'));
+const Favorite = lazy(() => import('./pages/Favorite'));
+const Profile = lazy(() => import('./pages/Profile'));
 
 const App = () => {
   const [theme, setTheme] = useState(Theme.Light);
@@ -26,6 +28,10 @@ const App = () => {
 
   useEffect(() => {
     dispatch(checkAuth());
+
+    window.document.addEventListener('dblclick', () => {
+      setTheme(theme === Theme.Light ? Theme.Dark : Theme.Light);
+    });
   }, []);
 
   useEffect(() => {
@@ -58,8 +64,11 @@ const App = () => {
             <Route path={RoutesList.SIGN_IN} element={<SignInForm />} />
             <Route path={RoutesList.SIGN_UP} element={<SignUpForm />} />
           </Route>
-          <Route path={RoutesList.Home} element={<ProtectedLayout />}>
-            <Route index element={'main'} />
+          <Route path={RoutesList.Home} element={<AppLayout />}>
+            <Route index element={<Home />} />
+            <Route path={RoutesList.Favorite} element={<Favorite />} />
+            <Route path={RoutesList.Notification} element={'Notification'} />
+            <Route path={RoutesList.Profile} element={<Profile />} />
           </Route>
           <Route path={RoutesList.NOT_FOUND} element={<NotFound />} />
         </Routes>

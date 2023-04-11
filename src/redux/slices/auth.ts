@@ -18,7 +18,8 @@ export const initialState: State = {
   error: null,
 };
 
-const isError = (action: AnyAction) => action.type.endsWith('rejected');
+const isError = (action: AnyAction) =>
+  action.type.endsWith('rejected') && !action.type.includes('auth/check');
 
 const auth = createSlice({
   name: 'auth',

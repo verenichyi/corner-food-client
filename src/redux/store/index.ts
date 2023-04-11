@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import auth from '../slices/auth';
+import food from '../slices/food';
 
 export const rootReducer = combineReducers({
   auth,
+  food,
 });
 
 export const store = configureStore({

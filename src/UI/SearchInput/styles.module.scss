@@ -1,0 +1,35 @@
+.form {
+  width: 100%;
+}
+.wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  display: inline-block;
+  width: 100%;
+  font-size: 14px;
+  padding: 12px 12px 12px 50px;
+  border: none;
+  color: var(--primaryText);
+  background-color: var(--elementBackground);
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.01);
+  border-radius: 20px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  fill: var(--primaryText);
+  transition: all 0.2s ease;
+}

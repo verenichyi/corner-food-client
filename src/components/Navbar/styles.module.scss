@@ -1,0 +1,102 @@
+.navbar {
+  background-color: var(--elementBackground);
+  min-width: 320px;
+  max-width: 768px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.container {
+  padding: 0 36px 0 30px;
+}
+
+.nav {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  background-color: var(--appBackground);
+}
+
+.left,
+.right {
+  display: flex;
+  align-items: center;
+  gap: 45px;
+  padding: 16px 0 12px;
+  background-color: var(--elementBackground);
+}
+
+.left {
+  flex: 1;
+  justify-content: flex-start;
+  border-top-right-radius: 20px;
+}
+
+.right {
+  flex: 1;
+  justify-content: flex-end;
+  border-top-left-radius: 20px;
+}
+
+.navItem {
+  display: block;
+
+  & .icon {
+    width: 20px;
+    height: 20px;
+    fill: var(--navNotActiveElement);
+  }
+}
+
+.navItem_active {
+  .icon {
+    fill: var(--navActiveElement);
+  }
+}
+
+.divider {
+  background-color: var(--elementBackground);
+  width: 67px;
+  height: 34px;
+}
+
+.cart {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -50%);
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background-color: var(--appBackground);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--elementBackground);
+}
+
+.cartButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: var(--primaryElement);
+  border: none;
+
+  img {
+    width: 22px;
+    height: 22px;
+  }
+}
+

@@ -3,8 +3,10 @@ import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/redux';
 import { selectAuth } from '../../redux/store/selectors';
 import RoutesList from '../../constants/routes';
+import styles from './styles.module.scss';
+import Navbar from '../../components/Navbar';
 
-const ProtectedLayout = () => {
+const AppLayout = () => {
   const { isAuthorized } = useAppSelector(selectAuth);
   const location = useLocation();
 
@@ -12,7 +14,14 @@ const ProtectedLayout = () => {
     return <Navigate to={RoutesList.SIGN_IN} replace state={{ from: location }} />;
   }
 
-  return <Outlet />;
+  return (
+    <div className={styles.app}>
+      <main className={styles.main}>
+        <Outlet />
+      </main>
+      <Navbar />
+    </div>
+  );
 };
 
-export default ProtectedLayout;
+export default AppLayout;
