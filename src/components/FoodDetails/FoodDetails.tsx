@@ -1,62 +1,64 @@
-import React, { useEffect, useRef, useState, TouchEvent } from 'react';
+import React, { MouseEvent } from 'react';
+import favoriteUnselected from '../../assets/images/ic_favorite_unselected.png';
+import favoriteSelected from '../../assets/images/ic_favorite_selected.png';
 import styles from './styles.module.scss';
-import FoodCard from '../FoodCard';
 import { FoodModel } from '../../models/Food/food';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { selectAuth, selectFood } from '../../redux/store/selectors';
-import { getUserFavoriteFood } from '../../redux/asyncActions/food';
-import { useParams } from 'react-router';
-import useSwipe from '../../hooks/useSwipe';
+import { selectAuth } from '../../redux/store/selectors';
+import { addFoodToFavorite, deleteFoodFromFavorite } from '../../redux/asyncActions/food';
 import { useLocation, useNavigate } from 'react-router-dom';
 import RoutesList from '../../constants/routes';
 
-const FoodDetails = () => {
-  const { foodId } = useParams();
+interface Props {
+  food: FoodModel;
+  isFavorite: boolean;
+  favoriteId?: string;
+}
+
+const FoodDetails = ({ food, isFavorite, favoriteId }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user } = useAppSelector(selectAuth);
-  const { userFavoriteFood } = useAppSelector(selectFood);
   const dispatch = useAppDispatch();
-  const origin = location.state?.from?.pathname || RoutesList.Home;
-  const { onTouchStart, onTouchMove, onTouchEnd } = useSwipe({
-    onSwipedLeft: () => navigate(origin, { replace: true }),
-    onSwipedRight: () => navigate(origin, { replace: true }),
-  });
+  const { user } = useAppSelector(selectAuth);
+  const favoriteImg = isFavorite ? favoriteSelected : favoriteUnselected;
 
-  // const cards = useMemo(
-  //   () =>
-  //     food.map((food) => {
-  //       const favoriteFood = userFavoriteFood.find(
-  //         (favoriteFood) =>
-  //           user && favoriteFood.user._id === user._id && favoriteFood.food._id === food._id,
-  //       );
-  //
-  //       if (favoriteFood) {
-  //         return (
-  //           <FoodCard key={food._id} food={food} favoriteId={favoriteFood._id} isFavorite={true} />
-  //         );
-  //       }
-  //
-  //       return <FoodCard key={food._id} food={food} isFavorite={false} />;
-  //     }),
-  //   [food, userFavoriteFood],
-  // );
+  const toggleFavorite = (foodId: string, event: MouseEvent) => {
+    event.stopPropagation();
 
-  useEffect(() => {
-    if (user) {
-      dispatch(getUserFavoriteFood(user._id));
+    if (isFavorite && favoriteId) {
+      dispatch(deleteFoodFromFavorite(favoriteId));
+      return;
     }
-  }, []);
+
+    dispatch(addFoodToFavorite({ user: user!._id, food: foodId }));
+  };
 
   return (
-    <div
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
-      className={styles.details}
+    <figure
+      onClick={() =>
+        navigate(`${RoutesList.FoodDetails}/${food._id}`, { state: { from: location } })
+      }
+      className={styles.card}
     >
-      <div className={styles.container}>details</div>
-    </div>
+      <div className={styles.image}>
+        <img src={food.image} alt="food card" />
+        <div
+          onClick={(event: MouseEvent) => toggleFavorite(food._id, event)}
+          className={styles.favorite}
+        >
+          <img className={styles.favoriteIcon} src={favoriteImg} alt="favorite" />
+        </div>
+      </div>
+      <figcaption className={styles.body}>
+        <h2 className={styles.title}>{food.title}</h2>
+        <h3 className={styles.subtitle}>{food.subtitle}</h3>
+        <p className={styles.price}>
+          <span>$</span>
+          {food.price}
+        </p>
+      </figcaption>
+      <button className={styles.button}>Add to cart</button>
+    </figure>
   );
 };
 

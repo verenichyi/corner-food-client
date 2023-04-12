@@ -7,12 +7,14 @@ import {
   deleteFoodFromFavorite,
   searchFood,
   searchFavoriteFood,
+  getFoodById,
 } from '../asyncActions/food';
 import { FavoriteFoodModel } from '../../models/Food/favorite-food';
 
 interface State {
   foodTypes: FoodType[];
   food: FoodModel[];
+  foodDetails: FoodModel | null;
   userFavoriteFood: FavoriteFoodModel[];
   loading: boolean;
   error: string | null;
@@ -21,6 +23,7 @@ interface State {
 export const initialState: State = {
   foodTypes: [],
   food: [],
+  foodDetails: null,
   userFavoriteFood: [],
   loading: false,
   error: null,
@@ -44,6 +47,16 @@ const food = createSlice({
     builder.addCase(getFoodTypes.fulfilled, (state, action: PayloadAction<FoodType[]>) => {
       state.loading = false;
       state.foodTypes = action.payload;
+    });
+
+    builder.addCase(getFoodById.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+      state.foodDetails = null;
+    });
+    builder.addCase(getFoodById.fulfilled, (state, action: PayloadAction<FoodModel>) => {
+      state.loading = false;
+      state.foodDetails = action.payload;
     });
 
     builder.addCase(searchFood.pending, (state) => {

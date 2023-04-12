@@ -14,7 +14,7 @@ import { themeAttribute } from './constants/theme';
 import { Theme } from './models/theme';
 import { authActions } from './redux/slices/auth';
 import PageAnimationLayout from './layouts/PageAnimationLayout';
-import FoodDetails from './components/FoodDetails';
+import FoodDetailsPage from './pages/FoodDetailsPage';
 
 const AppLayout = lazy(() => import('./layouts/AppLayout'));
 const AuthLayout = lazy(() => import('./layouts/AuthLayout'));
@@ -114,7 +114,7 @@ const App = () => {
               path={`${RoutesList.FoodDetails}/:foodId`}
               element={
                 <PageAnimationLayout>
-                  <FoodDetails />
+                  <FoodDetailsPage />
                 </PageAnimationLayout>
               }
             />

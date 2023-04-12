@@ -35,9 +35,7 @@ const Food = memo(({ food }: Props) => {
   );
 
   useEffect(() => {
-    if (user) {
-      dispatch(getUserFavoriteFood(user._id));
-    }
+    dispatch(getUserFavoriteFood(user!._id));
   }, []);
 
   return cards.length ? (

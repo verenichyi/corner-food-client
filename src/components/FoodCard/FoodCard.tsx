@@ -25,14 +25,12 @@ const FoodCard = ({ food, isFavorite, favoriteId }: Props) => {
   const toggleFavorite = (foodId: string, event: MouseEvent) => {
     event.stopPropagation();
 
-    if (user) {
-      if (isFavorite && favoriteId) {
-        dispatch(deleteFoodFromFavorite(favoriteId));
-        return;
-      }
-
-      dispatch(addFoodToFavorite({ user: user._id, food: foodId }));
+    if (isFavorite && favoriteId) {
+      dispatch(deleteFoodFromFavorite(favoriteId));
+      return;
     }
+
+    dispatch(addFoodToFavorite({ user: user!._id, food: foodId }));
   };
 
   return (

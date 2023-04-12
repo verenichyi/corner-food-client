@@ -1,4 +1,4 @@
-import React, { memo, PropsWithChildren, useEffect, useRef, useState } from 'react';
+import React, { memo, PropsWithChildren, useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import { useAppSelector } from '../../hooks/redux';
 import { selectAuth } from '../../redux/store/selectors';

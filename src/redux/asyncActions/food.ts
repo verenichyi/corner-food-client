@@ -61,6 +61,18 @@ export const getAllFood = createAsyncThunk<FoodModel[], void, { rejectValue: str
   },
 );
 
+export const getFoodById = createAsyncThunk<FoodModel, string, { rejectValue: string }>(
+  'food/getFoodById',
+  async (id, { rejectWithValue }) => {
+    try {
+      const { data } = await FoodService.getFoodById(id);
+      return data;
+    } catch (error) {
+      return rejectWithValue(handleAxiosError(error));
+    }
+  },
+);
+
 export const getUserFavoriteFood = createAsyncThunk<
   FavoriteFoodModel[],
   string,
