@@ -5,6 +5,7 @@ enum RoutesList {
   Favorite = '/favorite',
   Notification = '/notification',
   Profile = '/profile',
+  FoodDetails = '/food-details',
   NOT_FOUND = '*',
 }
 

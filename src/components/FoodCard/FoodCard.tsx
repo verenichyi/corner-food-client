@@ -1,15 +1,13 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import favoriteUnselected from '../../assets/images/ic_favorite_unselected.png';
 import favoriteSelected from '../../assets/images/ic_favorite_selected.png';
 import styles from './styles.module.scss';
 import { FoodModel } from '../../models/Food/food';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { selectAuth } from '../../redux/store/selectors';
-import {
-  addFoodToFavorite,
-  deleteFoodFromFavorite,
-  getUserFavoriteFood,
-} from '../../redux/asyncActions/food';
+import { addFoodToFavorite, deleteFoodFromFavorite } from '../../redux/asyncActions/food';
+import { useLocation, useNavigate } from 'react-router-dom';
+import RoutesList from '../../constants/routes';
 
 interface Props {
   food: FoodModel;
@@ -18,11 +16,15 @@ interface Props {
 }
 
 const FoodCard = ({ food, isFavorite, favoriteId }: Props) => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useAppDispatch();
   const { user } = useAppSelector(selectAuth);
   const favoriteImg = isFavorite ? favoriteSelected : favoriteUnselected;
 
-  const toggleFavorite = (foodId: string) => {
+  const toggleFavorite = (foodId: string, event: MouseEvent) => {
+    event.stopPropagation();
+
     if (user) {
       if (isFavorite && favoriteId) {
         dispatch(deleteFoodFromFavorite(favoriteId));
@@ -34,10 +36,18 @@ const FoodCard = ({ food, isFavorite, favoriteId }: Props) => {
   };
 
   return (
-    <figure className={styles.card}>
+    <figure
+      onClick={() =>
+        navigate(`${RoutesList.FoodDetails}/${food._id}`, { state: { from: location } })
+      }
+      className={styles.card}
+    >
       <div className={styles.image}>
         <img src={food.image} alt="food card" />
-        <div onClick={() => toggleFavorite(food._id)} className={styles.favorite}>
+        <div
+          onClick={(event: MouseEvent) => toggleFavorite(food._id, event)}
+          className={styles.favorite}
+        >
           <img className={styles.favoriteIcon} src={favoriteImg} alt="favorite" />
         </div>
       </div>

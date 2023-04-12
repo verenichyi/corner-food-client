@@ -13,6 +13,9 @@ import RoutesList from './constants/routes';
 import { themeAttribute } from './constants/theme';
 import { Theme } from './models/theme';
 import { authActions } from './redux/slices/auth';
+import PageAnimationLayout from './layouts/PageAnimationLayout';
+import FoodDetails from './components/FoodDetails';
+
 const AppLayout = lazy(() => import('./layouts/AppLayout'));
 const AuthLayout = lazy(() => import('./layouts/AuthLayout'));
 const SignInForm = lazy(() => import('./components/SignInForm'));
@@ -61,14 +64,60 @@ const App = () => {
       >
         <Routes>
           <Route path={RoutesList.Home} element={<AuthLayout />}>
-            <Route path={RoutesList.SIGN_IN} element={<SignInForm />} />
-            <Route path={RoutesList.SIGN_UP} element={<SignUpForm />} />
+            <Route
+              path={RoutesList.SIGN_IN}
+              element={
+                <PageAnimationLayout>
+                  <SignInForm />
+                </PageAnimationLayout>
+              }
+            />
+            <Route
+              path={RoutesList.SIGN_UP}
+              element={
+                <PageAnimationLayout>
+                  <SignUpForm />
+                </PageAnimationLayout>
+              }
+            />
           </Route>
           <Route path={RoutesList.Home} element={<AppLayout />}>
-            <Route index element={<Home />} />
-            <Route path={RoutesList.Favorite} element={<Favorite />} />
-            <Route path={RoutesList.Notification} element={'Notification'} />
-            <Route path={RoutesList.Profile} element={<Profile />} />
+            <Route
+              index
+              element={
+                <PageAnimationLayout>
+                  <Home />
+                </PageAnimationLayout>
+              }
+            />
+            <Route
+              path={RoutesList.Favorite}
+              element={
+                <PageAnimationLayout>
+                  <Favorite />
+                </PageAnimationLayout>
+              }
+            />
+            <Route
+              path={RoutesList.Notification}
+              element={<PageAnimationLayout>Notification</PageAnimationLayout>}
+            />
+            <Route
+              path={RoutesList.Profile}
+              element={
+                <PageAnimationLayout>
+                  <Profile />
+                </PageAnimationLayout>
+              }
+            />
+            <Route
+              path={`${RoutesList.FoodDetails}/:foodId`}
+              element={
+                <PageAnimationLayout>
+                  <FoodDetails />
+                </PageAnimationLayout>
+              }
+            />
           </Route>
           <Route path={RoutesList.NOT_FOUND} element={<NotFound />} />
         </Routes>
