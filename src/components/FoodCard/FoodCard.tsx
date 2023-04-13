@@ -1,6 +1,4 @@
 import React, { MouseEvent } from 'react';
-import favoriteUnselected from '../../assets/images/ic_favorite_unselected.png';
-import favoriteSelected from '../../assets/images/ic_favorite_selected.png';
 import styles from './styles.module.scss';
 import { FoodModel } from '../../models/Food/food';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -8,6 +6,7 @@ import { selectAuth } from '../../redux/store/selectors';
 import { addFoodToFavorite, deleteFoodFromFavorite } from '../../redux/asyncActions/food';
 import { useLocation, useNavigate } from 'react-router-dom';
 import RoutesList from '../../constants/routes';
+import icons from '../../assets/icons.svg';
 
 interface Props {
   food: FoodModel;
@@ -20,7 +19,6 @@ const FoodCard = ({ food, isFavorite, favoriteId }: Props) => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   const { user } = useAppSelector(selectAuth);
-  const favoriteImg = isFavorite ? favoriteSelected : favoriteUnselected;
 
   const toggleFavorite = (foodId: string, event: MouseEvent) => {
     event.stopPropagation();
@@ -46,7 +44,15 @@ const FoodCard = ({ food, isFavorite, favoriteId }: Props) => {
           onClick={(event: MouseEvent) => toggleFavorite(food._id, event)}
           className={styles.favorite}
         >
-          <img className={styles.favoriteIcon} src={favoriteImg} alt="favorite" />
+          <svg
+            className={
+              isFavorite
+                ? `${styles.favoriteIcon} ${styles.favoriteIcon_selected}`
+                : styles.favoriteIcon
+            }
+          >
+            <use xlinkHref={`${icons}#heart`} />
+          </svg>{' '}
         </div>
       </div>
       <figcaption className={styles.body}>

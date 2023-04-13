@@ -1,13 +1,13 @@
 import React, { MouseEvent } from 'react';
-import favoriteUnselected from '../../assets/images/ic_favorite_unselected.png';
-import favoriteSelected from '../../assets/images/ic_favorite_selected.png';
+import star from '../../assets/images/star.png';
+import clock from '../../assets/images/clock.png';
 import styles from './styles.module.scss';
 import { FoodModel } from '../../models/Food/food';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { selectAuth } from '../../redux/store/selectors';
 import { addFoodToFavorite, deleteFoodFromFavorite } from '../../redux/asyncActions/food';
-import { useLocation, useNavigate } from 'react-router-dom';
-import RoutesList from '../../constants/routes';
+import icons from '../../assets/icons.svg';
+import Counter from '../Counter';
 
 interface Props {
   food: FoodModel;
@@ -16,11 +16,8 @@ interface Props {
 }
 
 const FoodDetails = ({ food, isFavorite, favoriteId }: Props) => {
-  const navigate = useNavigate();
-  const location = useLocation();
   const dispatch = useAppDispatch();
   const { user } = useAppSelector(selectAuth);
-  const favoriteImg = isFavorite ? favoriteSelected : favoriteUnselected;
 
   const toggleFavorite = (foodId: string, event: MouseEvent) => {
     event.stopPropagation();
@@ -34,30 +31,52 @@ const FoodDetails = ({ food, isFavorite, favoriteId }: Props) => {
   };
 
   return (
-    <figure
-      onClick={() =>
-        navigate(`${RoutesList.FoodDetails}/${food._id}`, { state: { from: location } })
-      }
-      className={styles.card}
-    >
+    <figure className={styles.details}>
       <div className={styles.image}>
-        <img src={food.image} alt="food card" />
+        <img className={styles.foodImage} src={food.image} alt="food" />
         <div
           onClick={(event: MouseEvent) => toggleFavorite(food._id, event)}
           className={styles.favorite}
         >
-          <img className={styles.favoriteIcon} src={favoriteImg} alt="favorite" />
+          <svg
+            className={
+              isFavorite
+                ? `${styles.favoriteIcon} ${styles.favoriteIcon_selected}`
+                : styles.favoriteIcon
+            }
+          >
+            <use xlinkHref={`${icons}#heart`} />
+          </svg>
         </div>
       </div>
       <figcaption className={styles.body}>
-        <h2 className={styles.title}>{food.title}</h2>
+        <div className={styles.header}>
+          <h2 className={styles.title}>{food.title}</h2>
+          <p className={styles.price}>
+            <span>$</span>
+            {food.price}
+          </p>
+        </div>
         <h3 className={styles.subtitle}>{food.subtitle}</h3>
-        <p className={styles.price}>
-          <span>$</span>
-          {food.price}
-        </p>
+        <div className={styles.otherInfo}>
+          <div className={styles.ratingInfo}>
+            <img className={styles.ratingImg} src={star} alt="star" />
+            <span className={styles.rating}>{food.rating}</span>
+          </div>
+          <div className={styles.timeInfo}>
+            <img className={styles.timeImg} src={clock} alt="clock" />
+            <span className={styles.time}>{food.deliverTime} min</span>
+          </div>
+        </div>
+        <h3 className={styles.descriptionTitle}>About</h3>
+        <p className={styles.description}>{food.description}</p>
+        <div className={styles.cartPanel}>
+          <div className={styles.counter}>
+            <Counter />
+          </div>
+          <button className={styles.button}>ADD TO CART</button>
+        </div>
       </figcaption>
-      <button className={styles.button}>Add to cart</button>
     </figure>
   );
 };

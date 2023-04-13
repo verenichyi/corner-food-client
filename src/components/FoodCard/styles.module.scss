@@ -54,6 +54,15 @@
 .favoriteIcon {
   width: 18px;
   height: 18px;
+  fill: none;
+  stroke: white;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 30px;
+}
+
+.favoriteIcon_selected {
+  fill: var(--like);
 }
 
 .body {
