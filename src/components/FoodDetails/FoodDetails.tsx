@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react';
+import React, { MouseEvent, useState } from 'react';
 import star from '../../assets/images/star.png';
 import clock from '../../assets/images/clock.png';
 import styles from './styles.module.scss';
@@ -8,6 +8,11 @@ import { selectAuth } from '../../redux/store/selectors';
 import { addFoodToFavorite, deleteFoodFromFavorite } from '../../redux/asyncActions/food';
 import icons from '../../assets/icons.svg';
 import Counter from '../Counter';
+import { minProductAmountInCart } from '../../constants/cart';
+import { cartActions } from '../../redux/slices/cart';
+import currency from 'currency.js';
+import { useLocation, useNavigate } from 'react-router-dom';
+import RoutesList from '../../constants/routes';
 
 interface Props {
   food: FoodModel;
@@ -16,7 +21,11 @@ interface Props {
 }
 
 const FoodDetails = ({ food, isFavorite, favoriteId }: Props) => {
+  const [amount, setAmount] = useState(minProductAmountInCart);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { addToCart } = cartActions;
   const { user } = useAppSelector(selectAuth);
 
   const toggleFavorite = (foodId: string, event: MouseEvent) => {
@@ -28,6 +37,13 @@ const FoodDetails = ({ food, isFavorite, favoriteId }: Props) => {
     }
 
     dispatch(addFoodToFavorite({ user: user!._id, food: foodId }));
+  };
+
+  const handleAddToCart = (event: MouseEvent) => {
+    event.stopPropagation();
+    dispatch(addToCart({ product: food, amount: amount }));
+    const origin = location.state?.from?.pathname || RoutesList.Home;
+    navigate(origin, { replace: true });
   };
 
   return (
@@ -54,7 +70,7 @@ const FoodDetails = ({ food, isFavorite, favoriteId }: Props) => {
           <h2 className={styles.title}>{food.title}</h2>
           <p className={styles.price}>
             <span>$</span>
-            {food.price}
+            {currency(food.price, { precision: 2, symbol: '' }).format()}
           </p>
         </div>
         <h3 className={styles.subtitle}>{food.subtitle}</h3>
@@ -72,9 +88,11 @@ const FoodDetails = ({ food, isFavorite, favoriteId }: Props) => {
         <p className={styles.description}>{food.description}</p>
         <div className={styles.cartPanel}>
           <div className={styles.counter}>
-            <Counter />
+            <Counter minValue={minProductAmountInCart} getValue={(value) => setAmount(value)} />
           </div>
-          <button className={styles.button}>ADD TO CART</button>
+          <button onClick={handleAddToCart} className={styles.button}>
+            ADD TO CART
+          </button>
         </div>
       </figcaption>
     </figure>

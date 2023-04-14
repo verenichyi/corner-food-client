@@ -1,13 +1,17 @@
 import React from 'react';
 import { appNavBarItems } from '../../constants/routes';
 import styles from './styles.module.scss';
-import cart from '../../assets/images/cart.png';
+import cartImage from '../../assets/images/cart.png';
 import NavbarItem from '../NavbarItem';
 import FullscreenPopup from '../../UI/FullscreenPopup';
 import FullscreenPopupAnimationLayout from '../../layouts/FullscreenPopupAnimationLayout';
 import useIsActive from '../../hooks/useIsActive';
+import { useAppSelector } from '../../hooks/redux';
+import { selectCart } from '../../redux/store/selectors';
+import Cart from '../Cart';
 
 const Navbar = () => {
+  const { cart } = useAppSelector(selectCart);
   const [isOpened, toggleIsOpened] = useIsActive();
 
   return (
@@ -28,15 +32,16 @@ const Navbar = () => {
           <div onClick={toggleIsOpened} className={styles.cart}>
             <div className={styles.circle}>
               <button className={styles.cartButton}>
-                <img src={cart} alt="cart" />
+                <img src={cartImage} alt="cart" />
               </button>
             </div>
+            {cart.length > 0 && <div className={styles.productsAmount}>{cart.length}</div>}
           </div>
         </nav>
       </div>
       <FullscreenPopup isOpened={isOpened}>
         <FullscreenPopupAnimationLayout isOpened={isOpened}>
-          <div>cart</div>
+          <Cart onClose={toggleIsOpened} />
         </FullscreenPopupAnimationLayout>
       </FullscreenPopup>
     </div>
