@@ -1,16 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, MouseEvent } from 'react';
 import styles from './styles.module.scss';
 
 interface Props {
   minValue: number;
   getValue: (value: number) => void;
+  initialValue?: number;
 }
 
-const Counter = ({ minValue, getValue }: Props) => {
-  const [value, setValue] = useState(minValue);
+const Counter = ({ minValue, getValue, initialValue }: Props) => {
+  const [value, setValue] = useState(initialValue || minValue);
 
-  const increase = () => setValue((prevState) => prevState + 1);
-  const decrease = () =>
+  const increase = (event: MouseEvent) => {
+    event.stopPropagation();
+    setValue((prevState) => prevState + 1);
+  };
+  const decrease = (event: MouseEvent) => {
+    event.stopPropagation();
     setValue((prevState) => {
       if (prevState - 1 <= minValue) {
         return minValue;
@@ -18,6 +23,7 @@ const Counter = ({ minValue, getValue }: Props) => {
 
       return prevState - 1;
     });
+  };
 
   useEffect(() => {
     getValue(value);

@@ -27,7 +27,7 @@ const Cart = ({ onClose }: Props) => {
           <button onClick={onClose} className={styles.closeButton} />
         </div>
         {cart.length ? (
-          <>
+          <div className={styles.main}>
             <ul className={styles.productsList}>{cartProducts}</ul>
             <div className={styles.summary}>
               <div className={styles.promo}>
@@ -57,7 +57,7 @@ const Cart = ({ onClose }: Props) => {
               </div>
               <button className={styles.confirmButton}>CONFIRM ORDER</button>
             </div>
-          </>
+          </div>
         ) : (
           <div className={styles.emptyCartText}>Your cart is empty</div>
         )}

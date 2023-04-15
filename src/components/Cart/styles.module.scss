@@ -1,3 +1,6 @@
+@import 'src/styles/mixins/itemsWidthBetweenGaps';
+@import 'src/styles/mixins/breakpoints';
+
 .cart {
   min-width: 320px;
   max-width: 768px;
@@ -18,6 +21,20 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
+}
+
+.main {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .title {
@@ -54,12 +71,21 @@
 
 .productsList {
   flex: 1;
-  overflow: auto;
+  //overflow: auto;
+  //
+  //scrollbar-width: none;
+  //-ms-overflow-style: none;
+  //&::-webkit-scrollbar {
+  //  display: none;
+  //}
 
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  &::-webkit-scrollbar {
-    display: none;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+
+  @include screen-m {
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 }
 
@@ -71,7 +97,6 @@
 }
 
 .promo {
-  width: 100%;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -87,14 +112,18 @@
 }
 
 .promoInput {
-  display: block;
-  flex: 1;
+  display: inline-block;
+  width: 100%;
   font-size: 14px;
   line-height: 28px;
   font-weight: 500;
   color: var(--secondaryText);
   border: none;
   background: none;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .promoButton {
@@ -109,7 +138,6 @@
 }
 
 .summaryPanel {
-  //width: 100%;
   padding: 20px 22px 18px 22px;
   background-color: var(--elementBackground);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
