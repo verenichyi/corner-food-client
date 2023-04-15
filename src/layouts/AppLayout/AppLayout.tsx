@@ -9,6 +9,7 @@ import Navbar from '../../components/Navbar';
 const AppLayout = () => {
   const { isAuthorized } = useAppSelector(selectAuth);
   const location = useLocation();
+  const isFoodDetailsPath = location.pathname.includes(RoutesList.FoodDetails);
 
   if (!isAuthorized) {
     return <Navigate to={RoutesList.SIGN_IN} replace state={{ from: location }} />;
@@ -19,7 +20,7 @@ const AppLayout = () => {
       <main className={styles.main}>
         <Outlet />
       </main>
-      <Navbar />
+      {!isFoodDetailsPath && <Navbar />}
     </div>
   );
 };

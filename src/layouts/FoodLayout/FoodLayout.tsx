@@ -8,6 +8,7 @@ import Avatar from '../../UI/Avatar';
 import Chips from '../../components/Chips';
 import FilterButton from '../../UI/FilterButton';
 import useIsActive from '../../hooks/useIsActive';
+import ElementAnimationLayout from '../ElementAnimationLayout';
 
 interface Props {
   title: string;
@@ -41,7 +42,9 @@ const FoodLayout = memo(({ children, title, search }: PropsWithChildren<Props>) 
             <SearchInput handleSearch={setSearchValue} placeholder={'Search food...'} />
           </div>
           <FilterButton handleClick={toggleIsFilterActive} />
-          {isFilterActive && <Chips activeChip={activeChip} setActiveChip={setActiveChip} />}
+          <ElementAnimationLayout isActive={isFilterActive}>
+            <Chips activeChip={activeChip} setActiveChip={setActiveChip} />
+          </ElementAnimationLayout>
         </div>
         {children}
       </div>

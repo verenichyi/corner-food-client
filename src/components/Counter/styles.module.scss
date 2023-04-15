@@ -1,0 +1,48 @@
+.counter {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--counter);
+  padding: 5px;
+  border-radius: 20px;
+}
+
+.number {
+  color: var(--primaryText);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.minus,
+.plus {
+  position: relative;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  background-color: var(--primaryElement);
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+
+.minus:after,
+.plus:after,
+.plus:before {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 2px;
+  background-color: var(--primary);
+  top: 50%;
+  left: 50%;
+}
+
+.minus:after,
+.plus:after {
+  transform: translate(-50%, -50%);
+}
+
+.plus:before {
+  transform: translate(-50%, -50%) rotate(90deg);
+}

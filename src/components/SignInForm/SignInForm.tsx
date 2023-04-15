@@ -1,6 +1,8 @@
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 import styles from './styles.module.scss';
 import { LoginUserDto } from '../../models/User/UserDto';
 import validation from '../../constants/auth-validation';
@@ -8,10 +10,8 @@ import Input from '../../UI/Input';
 import Eye from '../../UI/Eye';
 import { useAppDispatch } from '../../hooks/redux';
 import { loginUser, loginWithGoogle } from '../../redux/asyncActions/auth';
-import { useLocation, useNavigate } from 'react-router-dom';
 import RoutesList from '../../constants/routes';
 import useIsActive from '../../hooks/useIsActive';
-import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 
 const SignInForm = () => {
   const { password, email } = validation;
@@ -48,6 +48,7 @@ const SignInForm = () => {
               position: toast.POSITION.TOP_RIGHT,
             });
           }}
+          shape="circle"
         />
       </div>
       <p className={styles.divider}>or</p>

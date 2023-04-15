@@ -36,6 +36,10 @@ export default class FoodService {
     return $authApi.get<FoodModel[]>(foodPath);
   }
 
+  static async getFoodById(id: string): Promise<AxiosResponse<FoodModel>> {
+    return $authApi.get<FoodModel>(`${foodPath}/${id}`);
+  }
+
   static async getUserFavoriteFood(id: string): Promise<AxiosResponse<FavoriteFoodModel[]>> {
     return $authApi.get<FavoriteFoodModel[]>(`${favoriteFoodPath}/user/${id}`);
   }

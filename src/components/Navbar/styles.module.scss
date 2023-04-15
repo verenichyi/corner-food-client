@@ -61,6 +61,7 @@
 }
 
 .cart {
+  cursor: pointer;
   position: absolute;
   left: 50%;
   top: 0;
@@ -100,3 +101,20 @@
   }
 }
 
+.productsAmount {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--primaryElement);
+  border-radius: 50%;
+  background-color: var(--elementBackground);
+  color: var(--primaryText);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px;
+}
