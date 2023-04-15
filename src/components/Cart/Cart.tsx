@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { createRef, useMemo } from 'react';
 import styles from './styles.module.scss';
 import { pageTitles } from '../../constants/page-titles';
 import promoCodeIcon from '../../assets/images/ic_promo_code.png';
@@ -6,6 +6,16 @@ import { useAppSelector } from '../../hooks/redux';
 import { selectCart } from '../../redux/store/selectors';
 import currency from 'currency.js';
 import CartItem from '../CartItem';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { MOUNT_ANIMATION_TIME } from '../../constants/animations';
+import animationStyles from './animation.module.scss';
+
+const contentAnimation = {
+  enter: animationStyles.contentEnter,
+  enterActive: animationStyles.contentEnterActive,
+  exit: animationStyles.contentExit,
+  exitActive: animationStyles.contentExitActive,
+};
 
 interface Props {
   onClose: () => void;
@@ -15,7 +25,21 @@ const Cart = ({ onClose }: Props) => {
   const { cart, totalPrice } = useAppSelector(selectCart);
 
   const cartProducts = useMemo(
-    () => cart.map((cartItem) => <CartItem key={cartItem.product._id} cartProduct={cartItem} />),
+    () =>
+      cart.map((cartItem) => {
+        const nodeRef = createRef<HTMLElement>();
+
+        return (
+          <CSSTransition
+            key={cartItem.product._id}
+            nodeRef={nodeRef}
+            timeout={MOUNT_ANIMATION_TIME}
+            classNames={contentAnimation}
+          >
+            <CartItem ref={nodeRef} cartProduct={cartItem} />
+          </CSSTransition>
+        );
+      }),
     [cart],
   );
 
@@ -28,7 +52,7 @@ const Cart = ({ onClose }: Props) => {
         </div>
         {cart.length ? (
           <div className={styles.main}>
-            <ul className={styles.productsList}>{cartProducts}</ul>
+            <TransitionGroup className={styles.productsList}>{cartProducts}</TransitionGroup>
             <div className={styles.summary}>
               <div className={styles.promo}>
                 <img className={styles.promoCodeIcon} src={promoCodeIcon} alt="sale" />

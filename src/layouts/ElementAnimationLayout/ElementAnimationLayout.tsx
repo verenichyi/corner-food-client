@@ -1,5 +1,5 @@
-import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
-import { CSSTransition, SwitchTransition } from 'react-transition-group';
+import React, { PropsWithChildren, useRef } from 'react';
+import { CSSTransition } from 'react-transition-group';
 import animationStyles from './animation.module.scss';
 import { MOUNT_ANIMATION_TIME } from '../../constants/animations';
 
