@@ -1,0 +1,117 @@
+.notification {
+  overflow: hidden;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.01);
+  border-radius: 20px;
+  background-color: var(--elementBackground);
+}
+
+.courierInfo {
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.photo {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  border-radius: 20px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.mainInfo {
+  flex: 1;
+
+  .name {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--primaryText);
+    margin-bottom: 5px;
+  }
+
+  .ID {
+    font-weight: 400;
+    font-size: 12px;
+    margin-bottom: 5px;
+    color: var(--secondaryText);
+  }
+
+  .role {
+    font-weight: 600;
+    font-size: 11px;
+    color: var(--secondaryText);
+  }
+}
+
+.callButton {
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 15px;
+  background-color: var(--primaryElement);
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.divider {
+  border: none;
+  border-bottom: 1px dashed var(--secondaryText);
+}
+
+.deliveryInfo {
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.time,
+.address {
+  display: flex;
+  gap: 6px;
+}
+
+.timeIcon,
+.locationIcon {
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  background-color: var(--primaryElement);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.timeInfoTitle,
+.addressInfoTitle {
+  font-weight: 500;
+  font-size: 8px;
+  color: var(--secondaryText);
+  margin-bottom: 4px;
+}
+
+.addressInfoContent,
+.timeInfoContent {
+  font-weight: 600;
+  font-size: 9px;
+  color: var(--primaryText);
+}

@@ -71,14 +71,6 @@
 
 .productsList {
   flex: 1;
-  //overflow: auto;
-  //
-  //scrollbar-width: none;
-  //-ms-overflow-style: none;
-  //&::-webkit-scrollbar {
-  //  display: none;
-  //}
-
   display: flex;
   flex-direction: column;
   gap: 25px;

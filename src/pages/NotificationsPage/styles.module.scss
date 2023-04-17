@@ -1,0 +1,30 @@
+@import 'src/styles/mixins/itemsWidthBetweenGaps';
+@import 'src/styles/mixins/breakpoints';
+
+.page {
+  min-width: 320px;
+  max-width: 768px;
+  margin: 0 auto;
+  background-color: var(--appBackground);
+}
+
+.container {
+  min-height: 100vh;
+  max-height: 100vh;
+  padding: 15px 29px 50px 24px;
+}
+
+.title {
+  color: var(--primaryText);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 36px;
+  margin-bottom: 20px;
+}
+
+.list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 27px;
+}

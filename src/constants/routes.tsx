@@ -4,10 +4,27 @@ enum RoutesList {
   Home = '/',
   Favorite = '/favorite',
   Notification = '/notification',
-  Profile = '/profile',
+  Account = '/profile/account',
+  Payment = '/profile/payment',
+  History = '/profile/history',
   FoodDetails = '/food-details',
   NOT_FOUND = '*',
 }
+
+export const profileNavBarItems = [
+  {
+    link: RoutesList.Account,
+    content: 'Account',
+  },
+  {
+    link: RoutesList.Payment,
+    content: 'Payment',
+  },
+  {
+    link: RoutesList.History,
+    content: 'History',
+  },
+];
 
 export const authNavBarItems = [
   {
@@ -37,7 +54,7 @@ export const appNavBarItems = {
       iconId: 'bell',
     },
     {
-      link: RoutesList.Profile,
+      link: RoutesList.Account,
       iconId: 'user',
     },
   ],

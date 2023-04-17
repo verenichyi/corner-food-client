@@ -1,0 +1,46 @@
+.account {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.theme {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  .themeTitle {
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--primaryText);
+  }
+
+  .themeState {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .themeStateText {
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: var(--secondaryText);
+  }
+
+  .themeSwitch {
+    font-size: 30px;
+  }
+}
+
+.logoutButton {
+  margin-top: 20px;
+  color: var(--primary);
+  background-color: var(--primaryElement);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 16px;
+}

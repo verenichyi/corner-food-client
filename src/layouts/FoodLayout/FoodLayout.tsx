@@ -1,4 +1,4 @@
-import React, { memo, PropsWithChildren, useEffect, useState } from 'react';
+import React, { memo, PropsWithChildren, useEffect, useLayoutEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import { useAppSelector } from '../../hooks/redux';
 import { selectAuth } from '../../redux/store/selectors';
@@ -22,7 +22,7 @@ const FoodLayout = memo(({ children, title, search }: PropsWithChildren<Props>) 
   const [isFilterActive, toggleIsFilterActive] = useIsActive();
   const avatar = user && user.profileImage ? user.profileImage : userAvatar;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     search(searchValue, activeChip);
   }, []);
 
@@ -35,7 +35,9 @@ const FoodLayout = memo(({ children, title, search }: PropsWithChildren<Props>) 
       <div className={styles.container}>
         <header className={styles.header}>
           <h1 className={styles.title}>{title}</h1>
-          <Avatar avatar={avatar} />
+          <div className={styles.avatar}>
+            <Avatar avatar={avatar} />
+          </div>
         </header>
         <div className={styles.searchFilter}>
           <div className={styles.search}>

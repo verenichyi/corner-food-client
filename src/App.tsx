@@ -1,4 +1,4 @@
-import React, { lazy, useEffect, useState, Suspense } from 'react';
+import React, { lazy, useEffect, Suspense } from 'react';
 import { Route, Routes } from 'react-router';
 import { toast, ToastContainer } from 'react-toastify';
 import { GoogleOAuthProvider } from '@react-oauth/google';
@@ -10,11 +10,14 @@ import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { selectAuth } from './redux/store/selectors';
 import { checkAuth } from './redux/asyncActions/auth';
 import RoutesList from './constants/routes';
-import { themeAttribute } from './constants/theme';
+import { themeLocalStorageKey, themeAttribute } from './constants/theme/theme';
 import { Theme } from './models/theme';
 import { authActions } from './redux/slices/auth';
 import PageAnimationLayout from './layouts/PageAnimationLayout';
 import FoodDetailsPage from './pages/FoodDetailsPage';
+import NotificationsPage from './pages/NotificationsPage';
+import Account from './pages/Account';
+import useLocalStorage from './hooks/useLocalStorage';
 
 const AppLayout = lazy(() => import('./layouts/AppLayout'));
 const AuthLayout = lazy(() => import('./layouts/AuthLayout'));
@@ -22,24 +25,22 @@ const SignInForm = lazy(() => import('./components/SignInForm'));
 const SignUpForm = lazy(() => import('./components/SignUpForm'));
 const Home = lazy(() => import('./pages/Home'));
 const Favorite = lazy(() => import('./pages/Favorite'));
-const Profile = lazy(() => import('./pages/Profile'));
+const ProfileLayout = lazy(() => import('./layouts/ProfileLayout'));
 
 const App = () => {
-  const [theme, setTheme] = useState(Theme.Light);
+  const [theme] = useLocalStorage(themeLocalStorageKey, Theme.Light);
   const { error } = useAppSelector(selectAuth);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(checkAuth());
 
-    window.document.addEventListener('dblclick', () => {
-      setTheme(theme === Theme.Light ? Theme.Dark : Theme.Light);
-    });
-  }, []);
+    // window.document.addEventListener('dblclick', () => {
+    //   setTheme(theme === Theme.Light ? Theme.Dark : Theme.Light);
+    // });
 
-  useEffect(() => {
     document.documentElement.setAttribute(themeAttribute, theme);
-  }, [theme]);
+  }, []);
 
   useEffect(() => {
     if (error) {
@@ -100,16 +101,23 @@ const App = () => {
             />
             <Route
               path={RoutesList.Notification}
-              element={<PageAnimationLayout>Notification</PageAnimationLayout>}
-            />
-            <Route
-              path={RoutesList.Profile}
               element={
                 <PageAnimationLayout>
-                  <Profile />
+                  <NotificationsPage />
                 </PageAnimationLayout>
               }
             />
+            <Route
+              element={
+                <PageAnimationLayout>
+                  <ProfileLayout />
+                </PageAnimationLayout>
+              }
+            >
+              <Route path={RoutesList.Account} element={<Account />} />
+              <Route path={RoutesList.Payment} element={'payment'} />
+              <Route path={RoutesList.History} element={'History'} />
+            </Route>
             <Route
               path={`${RoutesList.FoodDetails}/:foodId`}
               element={

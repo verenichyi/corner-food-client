@@ -3,12 +3,12 @@ import { appNavBarItems } from '../../constants/routes';
 import styles from './styles.module.scss';
 import cartImage from '../../assets/images/cart.png';
 import NavbarItem from '../NavbarItem';
-import FullscreenPopup from '../../UI/FullscreenPopup';
 import FullscreenPopupAnimationLayout from '../../layouts/FullscreenPopupAnimationLayout';
 import useIsActive from '../../hooks/useIsActive';
 import { useAppSelector } from '../../hooks/redux';
 import { selectCart } from '../../redux/store/selectors';
 import Cart from '../Cart';
+import FullscreenPopup from '../../UI/FullscreenPopup';
 
 const Navbar = () => {
   const { cart } = useAppSelector(selectCart);
