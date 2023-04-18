@@ -9,6 +9,12 @@ import CartItem from '../CartItem';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { MOUNT_ANIMATION_TIME } from '../../constants/animations';
 import animationStyles from './animation.module.scss';
+import OverlayingPopup from '../../UI/OverlayingPopup';
+import useIsActive from '../../hooks/useIsActive';
+import FullscreenPopupAnimationLayout from '../../layouts/FullscreenPopupAnimationLayout';
+import PromoCode from '../PromoCode';
+import AddressForm from '../AddressForm';
+import CrossButton from '../../UI/CrossButton';
 
 const contentAnimation = {
   enter: animationStyles.contentEnter,
@@ -23,6 +29,7 @@ interface Props {
 
 const Cart = ({ onClose }: Props) => {
   const { cart, totalPrice } = useAppSelector(selectCart);
+  const [isAddressPopupActive, toggleAddressPopup] = useIsActive();
 
   const cartProducts = useMemo(
     () =>
@@ -48,17 +55,13 @@ const Cart = ({ onClose }: Props) => {
       <div className={styles.container}>
         <div className={styles.header}>
           <h1 className={styles.title}>{pageTitles.order}</h1>
-          <button onClick={onClose} className={styles.closeButton} />
+          <CrossButton onClick={onClose} />
         </div>
         {cart.length ? (
           <div className={styles.main}>
             <TransitionGroup className={styles.productsList}>{cartProducts}</TransitionGroup>
             <div className={styles.summary}>
-              <div className={styles.promo}>
-                <img className={styles.promoCodeIcon} src={promoCodeIcon} alt="sale" />
-                <input className={styles.promoInput} type="text" placeholder={'Promo code...'} />
-                <button className={styles.promoButton}>Apply</button>
-              </div>
+              <PromoCode />
               <div className={styles.summaryPanel}>
                 <div className={styles.subTotal}>
                   <span className={styles.subTotalKey}>Subtotal</span>
@@ -79,7 +82,12 @@ const Cart = ({ onClose }: Props) => {
                   </span>
                 </div>
               </div>
-              <button className={styles.confirmButton}>CONFIRM ORDER</button>
+              <button onClick={toggleAddressPopup} className={styles.confirmButton}>
+                CONFIRM ORDER
+              </button>
+              <OverlayingPopup isOpened={isAddressPopupActive} onClose={toggleAddressPopup}>
+                <AddressForm onClose={toggleAddressPopup} />
+              </OverlayingPopup>
             </div>
           </div>
         ) : (

@@ -3,7 +3,6 @@ import { appNavBarItems } from '../../constants/routes';
 import styles from './styles.module.scss';
 import cartImage from '../../assets/images/cart.png';
 import NavbarItem from '../NavbarItem';
-import FullscreenPopupAnimationLayout from '../../layouts/FullscreenPopupAnimationLayout';
 import useIsActive from '../../hooks/useIsActive';
 import { useAppSelector } from '../../hooks/redux';
 import { selectCart } from '../../redux/store/selectors';
@@ -40,9 +39,7 @@ const Navbar = () => {
         </nav>
       </div>
       <FullscreenPopup isOpened={isOpened}>
-        <FullscreenPopupAnimationLayout isOpened={isOpened}>
-          <Cart onClose={toggleIsOpened} />
-        </FullscreenPopupAnimationLayout>
+        <Cart onClose={toggleIsOpened} />
       </FullscreenPopup>
     </div>
   );

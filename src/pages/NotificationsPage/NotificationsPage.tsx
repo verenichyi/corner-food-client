@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './styles.module.scss';
 import { pageTitles } from '../../constants/page-titles';
-import Notification from '../Notification';
+import Notification from '../../components/Notification';
 
 const NotificationsPage = () => {
   return (
