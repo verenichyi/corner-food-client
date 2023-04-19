@@ -18,6 +18,7 @@ import FoodDetailsPage from './pages/FoodDetailsPage';
 import NotificationsPage from './pages/NotificationsPage';
 import Account from './pages/Account';
 import useLocalStorage from './hooks/useLocalStorage';
+import Payment from './pages/Payment';
 
 const AppLayout = lazy(() => import('./layouts/AppLayout'));
 const AuthLayout = lazy(() => import('./layouts/AuthLayout'));
@@ -115,7 +116,7 @@ const App = () => {
               }
             >
               <Route path={RoutesList.Account} element={<Account />} />
-              <Route path={RoutesList.Payment} element={'payment'} />
+              <Route path={RoutesList.Payment} element={<Payment />} />
               <Route path={RoutesList.History} element={'History'} />
             </Route>
             <Route
