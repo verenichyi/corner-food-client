@@ -5,11 +5,11 @@ import Input from '../../UI/Input';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import CrossButton from '../../UI/CrossButton';
 import { AddressFormDto } from '../../models/Payment/address';
-import { makeOrder } from '../../redux/asyncActions/payments';
 import { selectAuth, selectCart, selectPayments } from '../../redux/store/selectors';
 import { toast } from 'react-toastify';
 import { cartActions } from '../../redux/slices/cart';
 import { paymentsActions } from '../../redux/slices/payments';
+import { makeOrder } from '../../redux/asyncActions/orders';
 
 interface Props {
   onClose: () => void;

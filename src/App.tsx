@@ -14,19 +14,20 @@ import { themeLocalStorageKey, themeAttribute } from './constants/theme/theme';
 import { Theme } from './models/theme';
 import { authActions } from './redux/slices/auth';
 import PageAnimationLayout from './layouts/PageAnimationLayout';
-import FoodDetailsPage from './pages/FoodDetailsPage';
-import NotificationsPage from './pages/NotificationsPage';
-import Account from './pages/Account';
 import useLocalStorage from './hooks/useLocalStorage';
-import Payment from './pages/Payment';
 
 const AppLayout = lazy(() => import('./layouts/AppLayout'));
 const AuthLayout = lazy(() => import('./layouts/AuthLayout'));
+const ProfileLayout = lazy(() => import('./layouts/ProfileLayout'));
 const SignInForm = lazy(() => import('./components/SignInForm'));
 const SignUpForm = lazy(() => import('./components/SignUpForm'));
 const Home = lazy(() => import('./pages/Home'));
 const Favorite = lazy(() => import('./pages/Favorite'));
-const ProfileLayout = lazy(() => import('./layouts/ProfileLayout'));
+const FoodDetailsPage = lazy(() => import('./pages/FoodDetailsPage'));
+const NotificationsPage = lazy(() => import('./pages/NotificationsPage'));
+const Account = lazy(() => import('./pages/Account'));
+const Payment = lazy(() => import('./pages/Payment'));
+const History = lazy(() => import('./pages/History'));
 
 const App = () => {
   const [theme] = useLocalStorage(themeLocalStorageKey, Theme.Light);
@@ -35,11 +36,6 @@ const App = () => {
 
   useEffect(() => {
     dispatch(checkAuth());
-
-    // window.document.addEventListener('dblclick', () => {
-    //   setTheme(theme === Theme.Light ? Theme.Dark : Theme.Light);
-    // });
-
     document.documentElement.setAttribute(themeAttribute, theme);
   }, []);
 
@@ -117,7 +113,7 @@ const App = () => {
             >
               <Route path={RoutesList.Account} element={<Account />} />
               <Route path={RoutesList.Payment} element={<Payment />} />
-              <Route path={RoutesList.History} element={'History'} />
+              <Route path={RoutesList.History} element={<History />} />
             </Route>
             <Route
               path={`${RoutesList.FoodDetails}/:foodId`}
