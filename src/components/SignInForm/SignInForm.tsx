@@ -48,7 +48,6 @@ const SignInForm = () => {
               position: toast.POSITION.TOP_RIGHT,
             });
           }}
-          shape="circle"
         />
       </div>
       <p className={styles.divider}>or</p>

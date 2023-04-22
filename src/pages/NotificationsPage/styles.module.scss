@@ -28,3 +28,10 @@
   flex-direction: column;
   gap: 27px;
 }
+
+.noActiveOrdersText {
+  text-align: center;
+  color: var(--primaryText);
+  font-size: 20px;
+  font-weight: 700;
+}

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import styles from './styles.module.scss';
 import { pageTitles } from '../../constants/page-titles';
 import Notification from '../../components/Notification';
@@ -15,7 +15,15 @@ const NotificationsPage = () => {
   const { setActiveOrders } = ordersActions;
   const { user } = useAppSelector(selectAuth);
   const { activeOrders } = useAppSelector(selectOrders);
-  console.log(activeOrders);
+
+  const notifications = useMemo(
+    () =>
+      activeOrders.map((orderNotification) => (
+        <Notification key={orderNotification.order._id} orderNotification={orderNotification} />
+      )),
+    [activeOrders],
+  );
+
   useEffect(() => {
     socket.emit(
       WebSocketEvents.FindUserActiveOrders,
@@ -38,9 +46,11 @@ const NotificationsPage = () => {
     <div className={styles.page}>
       <div className={styles.container}>
         <h1 className={styles.title}>{pageTitles.notification}</h1>
-        <ul className={styles.list}>
-          <Notification />
-        </ul>
+        {notifications.length > 0 ? (
+          <ul className={styles.list}>{notifications}</ul>
+        ) : (
+          <div className={styles.noActiveOrdersText}>No active orders</div>
+        )}
       </div>
     </div>
   );

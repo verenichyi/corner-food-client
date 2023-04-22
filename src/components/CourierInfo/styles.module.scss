@@ -1,0 +1,59 @@
+.courierInfo {
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.photo {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  border-radius: 20px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.mainInfo {
+  flex: 1;
+
+  .name {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--primaryText);
+    margin-bottom: 5px;
+  }
+
+  .ID {
+    font-weight: 400;
+    font-size: 12px;
+    margin-bottom: 5px;
+    color: var(--secondaryText);
+  }
+
+  .role {
+    font-weight: 600;
+    font-size: 11px;
+    color: var(--secondaryText);
+  }
+}
+
+.callButton {
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 15px;
+  background-color: var(--primaryElement);
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+}

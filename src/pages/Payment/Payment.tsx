@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import AddCardForm from '../../components/AddCardForm';
@@ -19,7 +19,7 @@ const Payment = () => {
   const { user } = useAppSelector(selectAuth);
   const { cards } = useAppSelector(selectPayments);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     dispatch(getCreditCards(user!.stripeCustomerId));
   }, []);
 

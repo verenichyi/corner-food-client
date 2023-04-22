@@ -1,25 +1,43 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styles from './styles.module.scss';
-import callIcon from '../../assets/images/ic_call.png';
 import timeIcon from '../../assets/images/ic_time.png';
 import locationIcon from '../../assets/images/ic_map.png';
-import defaultUser from '../../assets/images/user.png';
+import CourierInfo from '../CourierInfo';
+import { OrderNotification } from '../../models/Notifications/order-notification';
+import currency from 'currency.js';
 
-const Notification = () => {
+interface Props {
+  orderNotification: OrderNotification;
+}
+
+const Notification = ({ orderNotification }: Props) => {
+  const orderItems = useMemo(
+    () =>
+      orderNotification.order.orderItems.map((orderItem) => (
+        <div key={orderItem.product._id} className={styles.orderInfoItem}>
+          <span className={styles.orderInfoItemKey}>{orderItem.product.title}:</span>
+          <span className={styles.orderInfoItemValue}>
+            x{orderItem.amount} <span>$</span>
+            {currency(orderItem.product.price, { precision: 2, symbol: '' }).format()}
+          </span>
+        </div>
+      )),
+    [orderNotification],
+  );
+
   return (
     <li className={styles.notification}>
-      <div className={styles.courierInfo}>
-        <div className={styles.photo}>
-          <img src={defaultUser} alt="photo" />
+      <CourierInfo />
+      <hr className={styles.divider} />
+      <div className={styles.orderInfo}>
+        {orderItems}
+        <div className={styles.orderInfoItem}>
+          <span className={styles.orderInfoItemKey}>Total Price:</span>
+          <span className={styles.orderInfoItemValue}>
+            <span>$</span>
+            {currency(orderNotification.order.totalPrice, { precision: 2, symbol: '' }).format()}
+          </span>
         </div>
-        <div className={styles.mainInfo}>
-          <h2 className={styles.name}>Budi Sanjaya</h2>
-          <h3 className={styles.ID}>ID: 7856456459</h3>
-          <h4 className={styles.role}>Food courier</h4>
-        </div>
-        <a className={styles.callButton} href="tel:" role={'button'}>
-          <img src={callIcon} alt="tel" />
-        </a>
       </div>
       <hr className={styles.divider} />
       <div className={styles.deliveryInfo}>
@@ -28,8 +46,8 @@ const Notification = () => {
             <img src={timeIcon} alt="time" />
           </div>
           <div className={styles.timeInfo}>
-            <h2 className={styles.timeInfoTitle}>Your Delivery Time</h2>
-            <p className={styles.timeInfoContent}>60 minutes</p>
+            <h2 className={styles.timeInfoTitle}>Your Delivery Status</h2>
+            <p className={styles.timeInfoContent}>{orderNotification.status}</p>
           </div>
         </div>
         <div className={styles.address}>
