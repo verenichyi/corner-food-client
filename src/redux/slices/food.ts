@@ -16,6 +16,8 @@ interface State {
   food: FoodModel[];
   foodDetails: FoodModel | null;
   userFavoriteFood: FavoriteFoodModel[];
+  isFavoriteFoodLoading: boolean;
+  isFoodLoading: boolean;
   loading: boolean;
   error: string | null;
 }
@@ -25,6 +27,8 @@ export const initialState: State = {
   food: [],
   foodDetails: null,
   userFavoriteFood: [],
+  isFavoriteFoodLoading: false,
+  isFoodLoading: false,
   loading: false,
   error: null,
 };
@@ -60,34 +64,34 @@ const food = createSlice({
     });
 
     builder.addCase(searchFood.pending, (state) => {
-      state.loading = true;
+      state.isFoodLoading = true;
       state.error = null;
     });
     builder.addCase(searchFood.fulfilled, (state, action: PayloadAction<FoodModel[]>) => {
-      state.loading = false;
+      state.isFoodLoading = false;
       state.food = action.payload;
     });
 
     builder.addCase(searchFavoriteFood.pending, (state) => {
-      state.loading = true;
+      state.isFavoriteFoodLoading = true;
       state.error = null;
     });
     builder.addCase(
       searchFavoriteFood.fulfilled,
       (state, action: PayloadAction<FavoriteFoodModel[]>) => {
-        state.loading = false;
+        state.isFavoriteFoodLoading = false;
         state.userFavoriteFood = action.payload;
       },
     );
 
     builder.addCase(getUserFavoriteFood.pending, (state) => {
-      state.loading = true;
+      state.isFavoriteFoodLoading = true;
       state.error = null;
     });
     builder.addCase(
       getUserFavoriteFood.fulfilled,
       (state, action: PayloadAction<FavoriteFoodModel[]>) => {
-        state.loading = false;
+        state.isFavoriteFoodLoading = false;
         state.userFavoriteFood = action.payload;
       },
     );

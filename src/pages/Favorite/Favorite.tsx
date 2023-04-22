@@ -5,11 +5,12 @@ import FavoriteFood from '../../components/FavoriteFood';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { searchFavoriteFood } from '../../redux/asyncActions/food';
 import { selectAuth, selectFood } from '../../redux/store/selectors';
+import Loader from '../../UI/Loader';
 
 const Favorite = () => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector(selectAuth);
-  const { userFavoriteFood } = useAppSelector(selectFood);
+  const { userFavoriteFood, isFavoriteFoodLoading } = useAppSelector(selectFood);
 
   const search = (searchValue: string, foodType: string) => {
     if (user) {
@@ -19,7 +20,7 @@ const Favorite = () => {
 
   return (
     <FoodLayout title={pageTitles.favorite} search={search}>
-      <FavoriteFood userFavoriteFood={userFavoriteFood} />
+      {isFavoriteFoodLoading ? <Loader /> : <FavoriteFood userFavoriteFood={userFavoriteFood} />}
     </FoodLayout>
   );
 };

@@ -4,3 +4,10 @@
   flex-direction: column;
   gap: 27px;
 }
+
+.noOrdersInHistory {
+  color: var(--primaryText);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}

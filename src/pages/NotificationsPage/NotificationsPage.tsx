@@ -8,13 +8,14 @@ import { selectAuth, selectOrders } from '../../redux/store/selectors';
 import { WebSocketEvents } from '../../constants/WebSocketEvents';
 import { OrderNotification } from '../../models/Notifications/order-notification';
 import { ordersActions } from '../../redux/slices/orders';
+import Loader from '../../UI/Loader';
 
 const NotificationsPage = () => {
   const socket = io(process.env.REACT_APP_API_URL!);
   const dispatch = useAppDispatch();
   const { setActiveOrders } = ordersActions;
   const { user } = useAppSelector(selectAuth);
-  const { activeOrders } = useAppSelector(selectOrders);
+  const { activeOrders, isActiveLoading } = useAppSelector(selectOrders);
 
   const notifications = useMemo(
     () =>
@@ -46,10 +47,16 @@ const NotificationsPage = () => {
     <div className={styles.page}>
       <div className={styles.container}>
         <h1 className={styles.title}>{pageTitles.notification}</h1>
-        {notifications.length > 0 ? (
-          <ul className={styles.list}>{notifications}</ul>
+        {isActiveLoading ? (
+          <Loader />
         ) : (
-          <div className={styles.noActiveOrdersText}>No active orders</div>
+          <>
+            {notifications.length > 0 ? (
+              <ul className={styles.list}>{notifications}</ul>
+            ) : (
+              <div className={styles.noActiveOrdersText}>No active orders</div>
+            )}
+          </>
         )}
       </div>
     </div>

@@ -6,14 +6,16 @@ import { getInactiveOrders } from '../asyncActions/orders';
 interface State {
   activeOrders: OrderNotification[];
   inactiveOrders: OrderModel[];
-  loading: boolean;
+  isInactiveLoading: boolean;
+  isActiveLoading: boolean;
   error: string | null;
 }
 
 export const initialState: State = {
   activeOrders: [],
   inactiveOrders: [],
-  loading: false,
+  isInactiveLoading: false,
+  isActiveLoading: false,
   error: null,
 };
 
@@ -27,22 +29,23 @@ const orders = createSlice({
       state.error = null;
     },
     setActiveOrders(state, action: PayloadAction<OrderNotification[]>) {
-      state.loading = false;
+      state.isActiveLoading = false;
       state.activeOrders = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(getInactiveOrders.pending, (state) => {
-      state.loading = true;
+      state.isInactiveLoading = true;
       state.error = null;
     });
     builder.addCase(getInactiveOrders.fulfilled, (state, action: PayloadAction<OrderModel[]>) => {
-      state.loading = false;
+      state.isInactiveLoading = false;
       state.inactiveOrders = action.payload;
     });
 
     builder.addMatcher(isError, (state, action: PayloadAction<string>) => {
-      state.loading = false;
+      state.isInactiveLoading = false;
+      state.isActiveLoading = false;
       state.error = action.payload;
     });
   },

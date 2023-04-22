@@ -56,7 +56,10 @@ const Notification = ({ orderNotification }: Props) => {
           </div>
           <div className={styles.addressInfo}>
             <h2 className={styles.addressInfoTitle}>Your Delivery Address</h2>
-            <p className={styles.addressInfoContent}>Bla city</p>
+            <p className={styles.addressInfoContent}>
+              {orderNotification.order.shippingAddress.city},{' '}
+              {orderNotification.order.shippingAddress.address}
+            </p>
           </div>
         </div>
       </div>
