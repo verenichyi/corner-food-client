@@ -1,0 +1,85 @@
+.notification {
+  overflow: hidden;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.01);
+  border-radius: 20px;
+  background-color: var(--elementBackground);
+}
+
+.divider {
+  border: none;
+  border-bottom: 1px dashed var(--secondaryText);
+}
+
+.deliveryInfo {
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.time,
+.address {
+  display: flex;
+  gap: 6px;
+}
+
+.timeIcon,
+.locationIcon {
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  background-color: var(--primaryElement);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.timeInfoTitle,
+.addressInfoTitle {
+  font-weight: 500;
+  font-size: 8px;
+  color: var(--secondaryText);
+  margin-bottom: 4px;
+}
+
+.addressInfoContent,
+.timeInfoContent {
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 9px;
+  color: var(--primaryText);
+}
+
+.orderInfo {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.orderInfoItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.orderInfoItemKey {
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--primaryText);
+}
+
+.orderInfoItemValue {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--secondaryText);
+}

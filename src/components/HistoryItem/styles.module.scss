@@ -1,0 +1,38 @@
+.item {
+  overflow: hidden;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.01);
+  border-radius: 20px;
+  background-color: var(--elementBackground);
+}
+
+.divider {
+  border: none;
+  border-bottom: 1px dashed var(--secondaryText);
+}
+
+.orderInfo {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.orderInfoItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.orderInfoItemKey {
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--primaryText);
+}
+
+.orderInfoItemValue {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--secondaryText);
+}

@@ -1,14 +1,20 @@
-import React, { createRef, useMemo } from 'react';
+import React, { createRef, useEffect, useMemo } from 'react';
 import styles from './styles.module.scss';
 import { pageTitles } from '../../constants/page-titles';
-import promoCodeIcon from '../../assets/images/ic_promo_code.png';
-import { useAppSelector } from '../../hooks/redux';
-import { selectCart } from '../../redux/store/selectors';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { selectAuth, selectCart, selectPayments } from '../../redux/store/selectors';
 import currency from 'currency.js';
 import CartItem from '../CartItem';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { MOUNT_ANIMATION_TIME } from '../../constants/animations';
 import animationStyles from './animation.module.scss';
+import OverlayingPopup from '../../UI/OverlayingPopup';
+import useIsActive from '../../hooks/useIsActive';
+import PromoCode from '../PromoCode';
+import AddressForm from '../AddressForm';
+import CrossButton from '../../UI/CrossButton';
+import { getCreditCards } from '../../redux/asyncActions/payments';
+import { toast } from 'react-toastify';
 
 const contentAnimation = {
   enter: animationStyles.contentEnter,
@@ -22,7 +28,11 @@ interface Props {
 }
 
 const Cart = ({ onClose }: Props) => {
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector(selectAuth);
+  const { cards } = useAppSelector(selectPayments);
   const { cart, totalPrice } = useAppSelector(selectCart);
+  const [isAddressPopupActive, toggleAddressPopup] = useIsActive();
 
   const cartProducts = useMemo(
     () =>
@@ -43,22 +53,33 @@ const Cart = ({ onClose }: Props) => {
     [cart],
   );
 
+  const handleOrder = () => {
+    if (!cards.length) {
+      toast.warn('Please, add payment card in your profile.', {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      return;
+    }
+
+    toggleAddressPopup();
+  };
+
+  useEffect(() => {
+    dispatch(getCreditCards(user!.stripeCustomerId));
+  }, []);
+
   return (
     <div className={styles.cart}>
       <div className={styles.container}>
         <div className={styles.header}>
           <h1 className={styles.title}>{pageTitles.order}</h1>
-          <button onClick={onClose} className={styles.closeButton} />
+          <CrossButton onClick={onClose} />
         </div>
         {cart.length ? (
           <div className={styles.main}>
             <TransitionGroup className={styles.productsList}>{cartProducts}</TransitionGroup>
             <div className={styles.summary}>
-              <div className={styles.promo}>
-                <img className={styles.promoCodeIcon} src={promoCodeIcon} alt="sale" />
-                <input className={styles.promoInput} type="text" placeholder={'Promo code...'} />
-                <button className={styles.promoButton}>Apply</button>
-              </div>
+              <PromoCode />
               <div className={styles.summaryPanel}>
                 <div className={styles.subTotal}>
                   <span className={styles.subTotalKey}>Subtotal</span>
@@ -79,7 +100,12 @@ const Cart = ({ onClose }: Props) => {
                   </span>
                 </div>
               </div>
-              <button className={styles.confirmButton}>CONFIRM ORDER</button>
+              <button onClick={handleOrder} className={styles.confirmButton}>
+                CONFIRM ORDER
+              </button>
+              <OverlayingPopup isOpened={isAddressPopupActive} onClose={toggleAddressPopup}>
+                <AddressForm onClose={toggleAddressPopup} onCartClose={onClose} />
+              </OverlayingPopup>
             </div>
           </div>
         ) : (

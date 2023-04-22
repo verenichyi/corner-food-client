@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react';
-import styles from './styles.module.scss';
 import Portal from '../Portal';
 import { useMount } from '../../hooks/useMount';
+import FullscreenPopupAnimationLayout from '../../layouts/FullscreenPopupAnimationLayout';
 
 interface Props {
   isOpened: boolean;
@@ -16,7 +16,9 @@ const FullscreenPopup = ({ children, isOpened }: PropsWithChildren<Props>) => {
 
   return (
     <Portal>
-      <div className={styles.container}>{children}</div>
+      <FullscreenPopupAnimationLayout isOpened={isOpened}>
+        {children}
+      </FullscreenPopupAnimationLayout>
     </Portal>
   );
 };

@@ -6,9 +6,12 @@
   --currency: #99c932;
   --error: #ff6f5a;
   --success: #11d17d;
-  --like: #D7443E;
-  --counter: #FDC27A19;
-  --totalPrice: #FF6347
+  --like: #d7443e;
+  --counter: #fdc27a19;
+  --totalPrice: #ff6347;
+  --cardBackground: #9c9c9c;
+  --cardText: #fff;
+  --cardElementBAckground: #f2f6f7;
 }
 
 :root[color-scheme='light'] {
@@ -35,6 +38,6 @@
   --navActiveElement: #fdc27a;
   --navNotActiveElement: #d1d1d1;
   --navBackground: #26273b;
-  --inputBorder: #2F3045;
+  --inputBorder: #2f3045;
   color-scheme: dark;
 }

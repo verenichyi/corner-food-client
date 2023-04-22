@@ -5,7 +5,6 @@ import FoodLayout from '../../layouts/FoodLayout';
 import { searchFood } from '../../redux/asyncActions/food';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { selectFood } from '../../redux/store/selectors';
-import PageAnimationLayout from '../../layouts/PageAnimationLayout';
 
 // const foodCards: FoodModel[] = [
 //   {
@@ -114,11 +113,9 @@ const Home = () => {
   };
 
   return (
-    <PageAnimationLayout>
-      <FoodLayout title={pageTitles.home} search={search}>
-        <Food food={food} />
-      </FoodLayout>
-    </PageAnimationLayout>
+    <FoodLayout title={pageTitles.home} search={search}>
+      <Food food={food} />
+    </FoodLayout>
   );
 };
 

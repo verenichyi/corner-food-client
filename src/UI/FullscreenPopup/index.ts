@@ -1,1 +1,2 @@
-export { default } from './FullscreenPopup';
+import FullscreenPopup from './FullscreenPopup';
+export default FullscreenPopup;

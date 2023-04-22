@@ -44,41 +44,8 @@
   line-height: 36px;
 }
 
-.closeButton {
-  position: relative;
-  cursor: pointer;
-}
-
-.closeButton:after,
-.closeButton:before {
-  content: '';
-  position: absolute;
-  width: 34px;
-  height: 8px;
-  border-radius: 20px;
-  background-color: var(--primaryText);
-  top: 50%;
-  right: 0;
-}
-
-.closeButton:after {
-  transform: translate(0, -50%) rotate(-45deg);
-}
-
-.closeButton:before {
-  transform: translate(0, -50%) rotate(45deg);
-}
-
 .productsList {
   flex: 1;
-  //overflow: auto;
-  //
-  //scrollbar-width: none;
-  //-ms-overflow-style: none;
-  //&::-webkit-scrollbar {
-  //  display: none;
-  //}
-
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -94,47 +61,6 @@
   flex-direction: column;
   gap: 26px;
   padding-top: 26px;
-}
-
-.promo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 10px 10px 20px;
-  background-color: var(--elementBackground);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  border-radius: 15px;
-}
-
-.promoCodeIcon {
-  width: 22px;
-  height: 22px;
-}
-
-.promoInput {
-  display: inline-block;
-  width: 100%;
-  font-size: 14px;
-  line-height: 28px;
-  font-weight: 500;
-  color: var(--secondaryText);
-  border: none;
-  background: none;
-
-  &:focus {
-    outline: none;
-  }
-}
-
-.promoButton {
-  color: var(--primary);
-  font-weight: 600;
-  font-size: 13px;
-  padding: 10px 16px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  background-color: var(--primaryElement);
-  border: none;
 }
 
 .summaryPanel {

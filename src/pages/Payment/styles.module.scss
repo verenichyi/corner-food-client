@@ -1,0 +1,63 @@
+.cardPanel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.addCardText {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primaryText);
+}
+
+.cardTitle {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primaryText);
+  margin-bottom: 20px;
+}
+
+.creditCard {
+  width: 240px;
+  height: 145px;
+  border-radius: 20px;
+  background-color: var(--cardBackground);
+}
+
+.cardHolder {
+  margin-top: 30px;
+  background-color: var(--primary);
+  color: var(--cardText);
+  font-size: 11px;
+  font-weight: 400;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+
+.cardNumber {
+  color: var(--cardText);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 0 20px;
+  margin-bottom: 20px;
+}
+
+.otherInfo {
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cardBrand {
+  text-transform: capitalize;
+  color: var(--cardText);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cardExp {
+  color: var(--cardText);
+  font-size: 11px;
+  font-weight: 600;
+}

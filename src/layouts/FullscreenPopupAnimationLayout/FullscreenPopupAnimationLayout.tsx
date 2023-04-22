@@ -2,6 +2,7 @@ import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import animationStyles from './animation.module.scss';
 import { MOUNT_ANIMATION_TIME } from '../../constants/animations';
+import styles from './styles.module.scss';
 
 const contentAnimation = {
   enter: animationStyles.contentEnter,
@@ -31,7 +32,9 @@ const FullscreenPopupAnimationLayout = ({ children, isOpened }: PropsWithChildre
       unmountOnExit
       classNames={contentAnimation}
     >
-      <div ref={contentRef}>{children}</div>
+      <div ref={contentRef} className={styles.container}>
+        {children}
+      </div>
     </CSSTransition>
   );
 };
